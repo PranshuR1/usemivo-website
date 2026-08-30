@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# large installer binaries (too big for git / GitHub's 100MB limit)
+/public/downloads/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
