@@ -1,13 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { demoSettings } from "@/data/content";
 import { cn } from "@/lib/utils";
 
 export function SettingsScreen({ highlight }: { highlight?: string }) {
-  const [lateNight, setLateNight] = useState(true);
-
   return (
     <div className="flex flex-col gap-3">
       <p className="text-lg font-semibold text-ink">Settings</p>
@@ -25,24 +22,7 @@ export function SettingsScreen({ highlight }: { highlight?: string }) {
               <p className="text-[13px] font-medium text-ink">{item.title}</p>
               <p className="mt-0.5 text-[11px] leading-snug text-ink-muted">{item.body}</p>
             </div>
-            {item.toggle ? (
-              <button
-                type="button"
-                onClick={() => setLateNight((v) => !v)}
-                className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${
-                  lateNight ? "bg-accent" : "bg-ink/15"
-                }`}
-                aria-pressed={lateNight}
-              >
-                <span
-                  className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform ${
-                    lateNight ? "translate-x-5" : "translate-x-0.5"
-                  }`}
-                />
-              </button>
-            ) : (
-              <ChevronRight size={16} className="shrink-0 text-ink-muted" />
-            )}
+            <ChevronRight size={16} className="shrink-0 text-ink-muted" />
           </div>
         ))}
       </div>

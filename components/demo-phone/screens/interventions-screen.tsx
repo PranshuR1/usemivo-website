@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Clock, Leaf, Sparkles, Search, ArrowLeft } from "lucide-react";
+import { Clock, Leaf, Sparkles, Search, ArrowLeft, ChevronRight } from "lucide-react";
 import {
   demoInterventions,
+  demoProtectSetup,
   demoSwap,
   demoUnlock,
   demoRescue,
@@ -64,9 +65,12 @@ function BackToIdle({ onBack }: { onBack: () => void }) {
 
 export function InterventionsScreen({
   initialStage = "idle",
+  highlight,
 }: {
   initialStage?: InterventionEntryStage;
+  highlight?: string;
 }) {
+  const [lateNight, setLateNight] = useState(true);
   const isAdaptive = initialStage === "adaptivePausing";
   const startStage: Stage = isAdaptive ? "pausing" : initialStage;
 
@@ -129,28 +133,70 @@ export function InterventionsScreen({
 
   return (
     <div className="flex min-h-[280px] flex-col gap-3">
-      <p className="text-lg font-semibold text-ink">Interventions</p>
+      <p className="text-lg font-semibold text-ink">{demoInterventions.heading}</p>
       <p className="-mt-2 text-xs text-ink-muted">{demoInterventions.sub}</p>
 
       {stage === "idle" && (
-        <div className="flex flex-col gap-2.5">
-          {demoInterventions.apps.map((app) => (
-            <button
-              key={app.name}
-              type="button"
-              onClick={() => startPause(app.name)}
-              className="flex items-center gap-3 rounded-2xl border border-ink/10 p-3 text-left transition-colors hover:border-accent/30 hover:bg-ink/5"
-            >
-              <div
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm font-semibold text-white"
-                style={{ backgroundColor: app.color }}
+        <>
+          <div className="flex flex-col gap-2.5">
+            {demoInterventions.apps.map((app) => (
+              <button
+                key={app.name}
+                type="button"
+                onClick={() => startPause(app.name)}
+                className="flex items-center gap-3 rounded-2xl border border-ink/10 p-3 text-left transition-colors hover:border-accent/30 hover:bg-ink/5"
               >
-                {app.initial}
+                <div
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm font-semibold text-white"
+                  style={{ backgroundColor: app.color }}
+                >
+                  {app.initial}
+                </div>
+                <span className="text-sm font-medium text-ink">{app.name}</span>
+              </button>
+            ))}
+          </div>
+
+          <p className="mt-1 text-[11px] font-medium uppercase tracking-wider text-ink-muted">
+            {demoProtectSetup.label}
+          </p>
+          <div className="flex flex-col divide-y divide-ink/10 rounded-2xl border border-ink/10">
+            {demoProtectSetup.rows.map((row) => (
+              <div
+                key={row.title}
+                className={cn(
+                  "flex items-center justify-between gap-3 p-3 transition-shadow",
+                  highlight === row.title &&
+                    "relative z-10 rounded-2xl ring-2 ring-accent shadow-[0_0_20px_-4px_rgba(212,135,42,0.5)]"
+                )}
+              >
+                <div className="min-w-0">
+                  <p className="text-[13px] font-medium text-ink">{row.title}</p>
+                  <p className="mt-0.5 text-[11px] leading-snug text-ink-muted">{row.body}</p>
+                </div>
+                {row.toggle ? (
+                  <button
+                    type="button"
+                    onClick={() => setLateNight((v) => !v)}
+                    className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${
+                      lateNight ? "bg-accent" : "bg-ink/15"
+                    }`}
+                    aria-pressed={lateNight}
+                    aria-label={row.title}
+                  >
+                    <span
+                      className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform ${
+                        lateNight ? "translate-x-5" : "translate-x-0.5"
+                      }`}
+                    />
+                  </button>
+                ) : (
+                  <ChevronRight size={16} className="shrink-0 text-ink-muted" />
+                )}
               </div>
-              <span className="text-sm font-medium text-ink">{app.name}</span>
-            </button>
-          ))}
-        </div>
+            ))}
+          </div>
+        </>
       )}
 
       <AnimatePresence mode="wait">

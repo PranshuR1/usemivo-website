@@ -1,11 +1,12 @@
 export const appStoreUrl = "https://apps.apple.com/us/app/mivo-scrolling/id6762094544";
-export const macDownloadUrl = "/downloads/Mivo.dmg";
-export const windowsDownloadUrl = "/downloads/Mivo-Setup.exe";
+export const macDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/v1.0.0/Mivo.dmg";
+export const windowsDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/v1.0.0/Mivo-Setup.exe";
 
 export const nav = {
   links: [
     { label: "How It Works", href: "#how-it-works" },
     { label: "Features", href: "#features" },
+    { label: "Milo & Spots", href: "#milo-spots" },
     { label: "Experiments", href: "#experiments" },
     { label: "Reviews", href: "#reviews" },
   ],
@@ -38,7 +39,7 @@ export const heroPhone = {
 export const demoTabs = [
   { id: "home", label: "Home" },
   { id: "patterns", label: "Patterns" },
-  { id: "interventions", label: "Interventions" },
+  { id: "interventions", label: "Protect" },
   { id: "settings", label: "Settings" },
 ] as const;
 
@@ -64,8 +65,18 @@ export const demoPatterns = {
   windowsKeptSub: "this week",
 };
 
+export const demoProtectSetup = {
+  label: "Protection setup",
+  rows: [
+    { title: "Late-Night Protection", body: "A quiet wind-down window after 10 PM.", toggle: true },
+    { title: "Daily Screen Time Protection", body: "Optional Apple Screen Time limits you control." },
+    { title: "App-Specific Friction", body: "Set a different pause length per app." },
+  ],
+};
+
 export const demoInterventions = {
-  sub: "Add a little friction before the scroll takes over.",
+  heading: "Protect",
+  sub: "Pause before you scroll, and set up what protects you.",
   apps: [
     { name: "Instagram", initial: "I", color: "#C77B4B" },
     { name: "TikTok", initial: "T", color: "#4A4A4A" },
@@ -149,14 +160,37 @@ export const homeSpotlight = {
   },
 };
 
+export const homeCards = {
+  milo: {
+    label: "Your Companion",
+    name: "Milo",
+    line: "Almost at today's line. No pressure.",
+    note: "A few quiet words, only when something stands out.",
+  },
+  spots: {
+    label: "Mivo Spots",
+    spot: "Desk",
+    mode: "Focus Mode · 45 min",
+    note: "Tap your Mivo Spot to start. Tap it again to end it.",
+  },
+  receipt: {
+    label: "Attention Receipt",
+    tracked: "4h 22m",
+    note: "Real time from Screen Time, next to what you remembered.",
+  },
+  forecast: {
+    label: "30-Day Forecast",
+    goal: "1h 30m goal",
+    note: "Your target eases down day by day. You can see exactly when you get there.",
+  },
+};
+
 export const demoSettings = {
   sections: [
+    { title: "Companion", body: "Milo's pace, personality, and whether he walks around the app." },
     { title: "Privacy Center", body: "Review what Mivo stores and how it's used." },
     { title: "Data Export", body: "Download a complete copy of your data anytime." },
-    { title: "Late-Night Protection", body: "A quiet wind-down window after 10 PM.", toggle: true },
-    { title: "Daily Screen Time Protection", body: "Optional Apple Screen Time limits you control." },
     { title: "Mivo for Mac", body: "Live stats from your Mac: time observed, focus vs. drift, and top apps." },
-    { title: "App-Specific Friction", body: "Set a different pause length per app." },
     { title: "Account", body: "Manage or permanently delete your account." },
   ],
 };
@@ -305,6 +339,12 @@ export const featureCategories = [
         detail:
           "Instead of generic tips, Mivo looks at when and how you actually open apps and names the specific pattern behind it — yours, not a stock one.",
       },
+      {
+        title: "Honest About Missing Data",
+        body: "If Screen Time can't report yet, Mivo says so. It never shows “0m” or quietly swaps in a different number.",
+        detail:
+          "A made-up zero would tell you something false about your day. When Mivo can't see a number, it holds the question back and tells you why, instead of grading you against data it doesn't have.",
+      },
     ],
   },
   {
@@ -378,6 +418,76 @@ export const featureCategories = [
     ],
   },
   {
+    category: "Milo, Your Companion",
+    features: [
+      {
+        title: "Meet Milo",
+        body: "A small meerkat who keeps you company through your pauses. A few quiet words when something stands out — never a nag.",
+        detail:
+          "Milo only reads what Mivo already knows — your pauses, today's target, the time of day — and speaks up at a pace you choose: Rarely, Balanced, or Often. He starts after a short privacy introduction, and one switch turns him off entirely.",
+      },
+      {
+        title: "Milo Walks Around Mivo",
+        body: "While Mivo is open, Milo wanders across your tabs and hops when you tap him. When he's tired or you're focusing, he naps in the corner.",
+        detail:
+          "iOS doesn't let any app draw over other apps, so Milo stays inside Mivo. He's off automatically with Reduce Motion, and there's a toggle in Companion settings if you'd rather he stay put.",
+      },
+      {
+        title: "Milo on Your Lock Screen",
+        body: "During a session or a Mivo Still run, Milo's face appears in your Lock Screen Live Activity and the Dynamic Island.",
+        detail:
+          "Only during a real timed session — Mivo deliberately doesn't keep a Live Activity running just to show him. Switch Companion off and he drops out of any running activity too.",
+      },
+      {
+        title: "Milo Is Honest About What He Can't See",
+        body: "He never claims to know how many times you opened an app or what's on your screen. iOS doesn't share that, so he doesn't pretend.",
+        detail:
+          "The Companion screen lists which signals Milo has and which he's missing, so a comment about your day is always based on something Mivo actually measured.",
+      },
+    ],
+  },
+  {
+    category: "Mivo Spots",
+    features: [
+      {
+        title: "Tap to Start a Place",
+        body: "A Mivo Spot is a small NFC tag for a place — your desk, your bedside, the car. Tap it with your iPhone and that place's setup begins.",
+        detail:
+          "Each Spot is programmed before it ships with a single link and nothing else: no apps, no name, no personal data. Your first tap connects it to your account; every tap after that starts it, and tapping again ends it.",
+      },
+      {
+        title: "Four Ways to Use a Spot",
+        body: "Pause Mode, Focus Mode, Intention Check, or Awareness Mode — each place gets the nudge that fits it.",
+        detail:
+          "Pause Mode adds Mivo's breathing pause before the Spot's apps open. Focus Mode shields them for the whole timer. Intention Check asks what you came here to do, once. Awareness Mode blocks nothing and just records the time.",
+      },
+      {
+        title: "Friction, Never a Lockout",
+        body: "Spots add awareness and a little friction. They don't lock you out of your phone.",
+        detail:
+          "One Spot runs at a time, and a Spot with no timer ends itself after 12 hours, so a forgotten Spot can't keep your apps shielded.",
+      },
+      {
+        title: "Skip the Banner",
+        body: "iOS shows a banner whenever a tag is read. A quick Shortcuts automation can make a tap start your Spot with no banner at all.",
+        detail:
+          "Apple doesn't let apps skip the banner themselves, so Mivo walks you through the four Shortcuts steps (NFC trigger, Tap a Mivo Spot, Run Immediately) after your first setup.",
+      },
+      {
+        title: "Honest Spot Summaries",
+        body: "After a Spot, Mivo shows how it went — and says “not measured” rather than showing zero when it can't see.",
+        detail:
+          "iOS reports app use to Mivo in steps, so Spot times are “close, not exact,” and the summary says so. Comparisons against your usual only appear after three earlier measured sessions in the same Spot.",
+      },
+      {
+        title: "A Spot Is Yours",
+        body: "Each Mivo Spot connects to one account. Disconnect it and it can be set up again or passed on.",
+        detail:
+          "Mivo never reveals who owns a Spot that's already taken. Your Spot's settings live on your phone, so a Desk Spot can become a Sleep Spot without touching the tag.",
+      },
+    ],
+  },
+  {
     category: "Mivo for Mac",
     features: [
       {
@@ -445,15 +555,15 @@ export const featureCategories = [
       },
       {
         title: "Lock Screen Live Activities",
-        body: "Current session time visible on your Lock Screen — no need to open Mivo.",
+        body: "Current session time visible on your Lock Screen — no need to open Mivo. Mivo Still runs get their own focus session activity.",
         detail:
-          "Glance at your Lock Screen and the running session time is already there — checking in doesn't require opening yet another app.",
+          "Glance at your Lock Screen and the running session time is already there — checking in doesn't require opening yet another app. If you have Milo on, his face sits beside the timer.",
       },
       {
         title: "Dynamic Island Integration",
         body: "Session information surfaced quietly in the Dynamic Island on supported devices.",
         detail:
-          "A small, persistent reminder that a session is running, without a notification demanding your attention.",
+          "A small, persistent reminder that a session is running, without a notification demanding your attention. Milo's face shows in the compact, minimal, and expanded views when Companion is on.",
       },
       {
         title: "Recovery Mode",
@@ -491,21 +601,27 @@ export const featureCategories = [
       },
       {
         title: "Adaptive Daily Scroll Windows",
-        body: "Personalized daily windows based on your goals and actual usage patterns.",
+        body: "Mivo watches for three days, starts your plan at your real average, then eases down toward the daily goal you pick.",
         detail:
-          "The window narrows gradually as you hit it, instead of jumping straight to a number that doesn't match how you actually use your phone.",
+          "The plan starts from what you actually do, never a number that doesn't match how you use your phone, and it holds steady once you reach your goal instead of dropping further.",
       },
       {
         title: "Personalized Scrolling Schedules",
-        body: "Build a scrolling schedule that fits your real life.",
+        body: "Pick your daily scroll times with one tap — hour chips instead of a long list, plus “Same as yesterday.”",
         detail:
-          "Built around your actual free time and habits, not a one-size-fits-all schedule copied from someone else's routine.",
+          "Hours that overlap another session or run past midnight are disabled, so you can't build a schedule that doesn't work. The same one-tap strip appears in Settings, the daily prompt, and onboarding.",
       },
       {
         title: "30-Day Plan Forecast",
         body: "See your daily target ramp down toward your goal over the next month, with an estimate of how many days until you get there.",
         detail:
-          "Instead of one big jump, the target eases down day by day — you can see exactly where it's headed and when you'll get there.",
+          "Right after observation ends, Mivo tells you how many days the plan will take and shows your day 1, day 8, day 15, and goal-day targets. Instead of one big jump, the target eases down day by day.",
+      },
+      {
+        title: "Comeback Fresh Start",
+        body: "Been away? Mivo offers a fresh start from where you are today — not from the plan you left behind.",
+        detail:
+          "Tell Mivo why you stopped, or skip it, then choose Ease back in, Steady, or Stretch me. Day one is always at or below what you're doing now, and the reply is never about willpower.",
       },
     ],
   },
@@ -516,7 +632,13 @@ export const featureCategories = [
         title: "Session Reflections",
         body: "After a scrolling session, Mivo asks gently: how do you feel? No shame. Just noticing.",
         detail:
-          "A single, quick check-in — not a survey. The point is noticing how a session actually felt, not filling out a form about it.",
+          "A single, quick check-in — not a survey. If you drift away from it, a countdown ends the screen after 60 seconds and saves whatever you'd filled in; touching anything restarts the clock.",
+      },
+      {
+        title: "Attention Receipt",
+        body: "A receipt for your day: tracked time from Screen Time, next to what you could actually remember.",
+        detail:
+          "Real time, straight from Screen Time. Recall, straight from you — including how often Mivo asked what you saw mid-scroll and how many things you could name.",
       },
       {
         title: "“Worth It?” Session Checks",
@@ -572,6 +694,38 @@ export const featureCategories = [
   },
 ];
 
+export const miloSpots = {
+  eyebrow: "New in Mivo",
+  heading: "A little company. A place to put the phone down.",
+  sub: "Two new ways to use your phone on purpose — one lives in the app, one lives on your desk.",
+  cards: [
+    {
+      id: "milo",
+      kicker: "Companion",
+      title: "Meet Milo.",
+      body: "A small meerkat who keeps you company through your pauses — a few quiet words when something stands out, never a nag.",
+      points: [
+        "Speaks at a pace you choose: Rarely, Balanced, or Often",
+        "Walks across your tabs while Mivo is open",
+        "Shows up in your Lock Screen and Dynamic Island during a session",
+      ],
+      footnote: "iOS won't let any app draw over other apps, so Milo only appears in Mivo and its Live Activities.",
+    },
+    {
+      id: "spots",
+      kicker: "Mivo Spots",
+      title: "Tap a place to start it.",
+      body: "A small NFC tag for your desk, your bedside, or the car. Tap it with your iPhone and that place's setup begins — tap again to end it.",
+      points: [
+        "Pause Mode, Focus Mode, Intention Check, or Awareness Mode",
+        "Friction and awareness, never a lockout",
+        "Connects to your account on the first tap, and nothing else is stored on the tag",
+      ],
+      footnote: "Needs an iPhone with NFC. Spot times are close, not exact — iOS reports app use in steps.",
+    },
+  ],
+};
+
 export const experiments = {
   eyebrow: "Experiments",
   heading: "Small, measurable changes.",
@@ -613,6 +767,7 @@ export const footer = {
   product: [
     { label: "How It Works", href: "#how-it-works" },
     { label: "Features", href: "#features" },
+    { label: "Milo & Spots", href: "#milo-spots" },
     { label: "Experiments", href: "#experiments" },
     { label: "Reviews", href: "#reviews" },
   ],

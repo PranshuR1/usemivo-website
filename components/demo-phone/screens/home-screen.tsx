@@ -1,10 +1,22 @@
 "use client";
 
 import { Shield } from "lucide-react";
-import { heroPhone, homeSpotlight } from "@/data/content";
+import { heroPhone, homeSpotlight, homeCards } from "@/data/content";
 import { cn } from "@/lib/utils";
 
-export type HomeHighlight = "liveTime" | "truthChecks" | "insight" | "estimate" | "breakdown" | "forgotten";
+export type HomeHighlight =
+  | "liveTime"
+  | "truthChecks"
+  | "insight"
+  | "estimate"
+  | "breakdown"
+  | "forgotten"
+  | "milo"
+  | "spots"
+  | "receipt"
+  | "forecast";
+
+const cardHighlights: HomeHighlight[] = ["estimate", "breakdown", "forgotten", "milo", "spots", "receipt", "forecast"];
 
 const ring = "ring-2 ring-accent shadow-[0_0_20px_-4px_rgba(212,135,42,0.5)]";
 
@@ -77,7 +89,57 @@ export function HomeScreen({ highlight }: { highlight?: HomeHighlight }) {
         </SpotlightCard>
       )}
 
-      {highlight !== "estimate" && highlight !== "breakdown" && highlight !== "forgotten" && (
+      {highlight === "milo" && (
+        <SpotlightCard>
+          <p className="text-[11px] font-medium uppercase tracking-wider text-accent-deep">
+            {homeCards.milo.label}
+          </p>
+          <div className="mt-2.5 flex items-center gap-3">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent/20 text-lg font-semibold text-accent-deep">
+              {homeCards.milo.name[0]}
+            </div>
+            <div>
+              <p className="text-xs text-ink-muted">{homeCards.milo.name} says</p>
+              <p className="text-[15px] font-medium leading-snug text-ink">“{homeCards.milo.line}”</p>
+            </div>
+          </div>
+          <p className="mt-2.5 text-xs text-ink-body">{homeCards.milo.note}</p>
+        </SpotlightCard>
+      )}
+
+      {highlight === "spots" && (
+        <SpotlightCard>
+          <p className="text-[11px] font-medium uppercase tracking-wider text-accent-deep">
+            {homeCards.spots.label}
+          </p>
+          <p className="mt-1.5 text-2xl font-semibold text-ink">{homeCards.spots.spot}</p>
+          <p className="text-xs text-ink-muted">{homeCards.spots.mode}</p>
+          <p className="mt-2.5 text-xs text-ink-body">{homeCards.spots.note}</p>
+        </SpotlightCard>
+      )}
+
+      {highlight === "receipt" && (
+        <SpotlightCard>
+          <p className="text-[11px] font-medium uppercase tracking-wider text-accent-deep">
+            {homeCards.receipt.label}
+          </p>
+          <p className="mt-1.5 text-[10px] uppercase tracking-wider text-ink-muted">Total tracked</p>
+          <p className="text-3xl font-semibold text-ink">{homeCards.receipt.tracked}</p>
+          <p className="mt-2 text-xs text-ink-body">{homeCards.receipt.note}</p>
+        </SpotlightCard>
+      )}
+
+      {highlight === "forecast" && (
+        <SpotlightCard>
+          <p className="text-[11px] font-medium uppercase tracking-wider text-accent-deep">
+            {homeCards.forecast.label}
+          </p>
+          <p className="mt-1.5 text-2xl font-semibold text-ink">{homeCards.forecast.goal}</p>
+          <p className="mt-2 text-xs text-ink-body">{homeCards.forecast.note}</p>
+        </SpotlightCard>
+      )}
+
+      {!(highlight && cardHighlights.includes(highlight)) && (
         <div
           className={cn(
             "rounded-2xl bg-gradient-to-br from-accent/25 via-accent/10 to-transparent p-4 transition-shadow",

@@ -17,20 +17,35 @@ const featureTarget: Record<string, DemoTarget> = {
   "Accuracy Scores": { tab: "home", highlight: "truthChecks" },
   "Forgotten-Time Analysis": { tab: "home", highlight: "forgotten" },
   "Personalized Pattern Insights": { tab: "patterns", highlight: "noticed" },
+  "Honest About Missing Data": { tab: "home", highlight: "breakdown" },
 
   // Intervention & Protection — each is its own stage, not all funneling into the same idle list
   "Five-Second Opening Pause": { tab: "interventions", stage: "pausing" },
   "Adaptive Intervention Friction": { tab: "interventions", stage: "adaptivePausing" },
   "Trigger & Intention Selection": { tab: "interventions", stage: "trigger" },
-  "Late-Night Protection": { tab: "settings", highlight: "Late-Night Protection" },
+  "Late-Night Protection": { tab: "interventions", highlight: "Late-Night Protection" },
   "Rescue Mode": { tab: "interventions", stage: "rescue" },
-  "Daily Screen Time Protection": { tab: "settings", highlight: "Daily Screen Time Protection" },
+  "Daily Screen Time Protection": { tab: "interventions", highlight: "Daily Screen Time Protection" },
   "Your Swap": { tab: "interventions", stage: "swap" },
   "AI-Reviewed Emergency Unlock": { tab: "interventions", stage: "unlock" },
 
   // Mivo Clear & Still — real dedicated screens now, not the generic app list
   "Mivo Clear (Beta)": { tab: "interventions", stage: "clear" },
   "Mivo Still (Beta)": { tab: "interventions", stage: "still" },
+
+  // Milo — the Home card shows what he says; the roaming toggle lives in Settings → Companion
+  "Meet Milo": { tab: "home", highlight: "milo" },
+  "Milo Walks Around Mivo": { tab: "settings", highlight: "Companion" },
+  "Milo on Your Lock Screen": { tab: "home", highlight: "liveTime" },
+  "Milo Is Honest About What He Can't See": { tab: "settings", highlight: "Companion" },
+
+  // Mivo Spots are physical NFC tags, which a web preview can't recreate — Home shows the Spot card
+  "Tap to Start a Place": { tab: "home", highlight: "spots" },
+  "Four Ways to Use a Spot": { tab: "home", highlight: "spots" },
+  "Friction, Never a Lockout": { tab: "home", highlight: "spots" },
+  "Skip the Banner": { tab: "home", highlight: "spots" },
+  "Honest Spot Summaries": { tab: "home", highlight: "spots" },
+  "A Spot Is Yours": { tab: "home", highlight: "spots" },
 
   // Mivo for Mac — only the two cross-device Settings rows have a real iPhone-side screen;
   // the rest are Mac-app-native and land on a sensible default (their detail text says so)
@@ -60,14 +75,16 @@ const featureTarget: Record<string, DemoTarget> = {
   "Before & After Comparisons": { tab: "patterns", highlight: "windowsKept" },
   "Adaptive Daily Scroll Windows": { tab: "patterns", highlight: "windowsKept" },
   "Personalized Scrolling Schedules": { tab: "patterns", highlight: "windowsKept" },
-  "30-Day Plan Forecast": { tab: "patterns", highlight: "windowsKept" },
+  "30-Day Plan Forecast": { tab: "home", highlight: "forecast" },
+  "Comeback Fresh Start": { tab: "patterns", highlight: "windowsKept" },
 
   // Reports & Reflections
   "Session Reflections": { tab: "patterns", highlight: "chart" },
+  "Attention Receipt": { tab: "home", highlight: "receipt" },
   "“Worth It?” Session Checks": { tab: "patterns", highlight: "chart" },
   "Weekly Truth Reports": { tab: "patterns", highlight: "chart" },
   "Monthly Mivo Effect Reports": { tab: "patterns", highlight: "chart" },
-  "App-Specific Friction Preferences": { tab: "settings", highlight: "App-Specific Friction" },
+  "App-Specific Friction Preferences": { tab: "interventions", highlight: "App-Specific Friction" },
 
   // Privacy & Control
   "Privacy Center": { tab: "settings", highlight: "Privacy Center" },

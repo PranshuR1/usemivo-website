@@ -1,0 +1,21 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "45UT26F58Q.app.mivo.com"
+        ],
+        "components": [
+          {
+            "/": "/s/*",
+            "comment": "Official Mivo Spots: the URL programmed onto each physical Spot"
+          },
+          {
+            "/": "/spot/*",
+            "comment": "Mivo Spots from the first version (self-written stickers); still honoured"
+          }
+        ]
+      }
+    ]
+  }
+}

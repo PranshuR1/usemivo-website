@@ -17,7 +17,7 @@ export type DemoTabId = "home" | "patterns" | "interventions" | "settings";
 export type DemoTarget =
   | { tab: "home"; highlight?: HomeHighlight }
   | { tab: "patterns"; highlight?: PatternsHighlight }
-  | { tab: "interventions"; stage?: InterventionEntryStage }
+  | { tab: "interventions"; stage?: InterventionEntryStage; highlight?: string }
   | { tab: "settings"; highlight?: string };
 
 const ENGAGEMENT_PROMPT_MS = 15000;
@@ -83,6 +83,7 @@ export function InteractivePhone({ initialTarget }: { initialTarget?: DemoTarget
                     initialStage={
                       applyInitial && target.tab === "interventions" ? target.stage ?? "idle" : "idle"
                     }
+                    highlight={applyInitial && target.tab === "interventions" ? target.highlight : undefined}
                   />
                 )}
                 {tab === "settings" && (
