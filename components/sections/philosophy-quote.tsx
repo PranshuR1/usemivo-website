@@ -7,7 +7,7 @@ import { philosophy } from "@/data/content";
 
 export function PhilosophyQuote() {
   return (
-    <section className="relative py-32 sm:py-40">
+    <section className="relative overflow-x-clip py-32 sm:py-40">
       <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-[110px]" />
       <Container className="max-w-3xl text-center">
         <motion.blockquote

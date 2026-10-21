@@ -8,7 +8,7 @@ import { reality } from "@/data/content";
 
 export function Reality() {
   return (
-    <section id="how-it-works" className="relative py-28 sm:py-36">
+    <section id="how-it-works" className="relative overflow-x-clip py-28 sm:py-36">
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px]" />
       <Container className="max-w-3xl text-center">
         <motion.div

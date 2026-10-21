@@ -9,7 +9,7 @@ import { finalCta, appStoreUrl } from "@/data/content";
 
 export function FinalCta() {
   return (
-    <section id="download" className="relative py-28 sm:py-36">
+    <section id="download" className="relative overflow-x-clip py-28 sm:py-36">
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-accent/10 blur-[130px]" />
       <Container className="max-w-2xl text-center">
         <motion.div initial="hidden" whileInView="show" viewport={viewportOnce} variants={fadeUp}>
