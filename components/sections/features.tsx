@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Download } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { ComingSoon } from "@/components/ui/coming-soon";
 import { fadeUp, viewportOnce } from "@/lib/motion";
 import { featureCategories, macDownloadUrl } from "@/data/content";
 import { FeatureExplorerModal } from "@/components/demo-phone/feature-explorer-modal";
@@ -165,7 +166,10 @@ export function Features() {
         <div className="mt-16 space-y-16">
           {featureCategories.map((cat) => (
             <motion.div key={cat.category} initial="hidden" whileInView="show" viewport={viewportOnce} variants={fadeUp}>
-              <h3 className="font-display text-2xl italic text-accent-deep">{cat.category}</h3>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <h3 className="font-display text-2xl italic text-accent-deep">{cat.category}</h3>
+                {cat.note && <ComingSoon>{cat.note}</ComingSoon>}
+              </div>
               <div className="mt-6 grid gap-x-10 gap-y-1 border-t border-ink/10 pt-6 sm:grid-cols-2">
                 {cat.features.map((feature) => (
                   <FeatureRow

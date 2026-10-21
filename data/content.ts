@@ -2,6 +2,10 @@ export const appStoreUrl = "https://apps.apple.com/us/app/mivo-scrolling/id67620
 export const macDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/v1.0.0/Mivo.dmg";
 export const windowsDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/v1.0.0/Mivo-Setup.exe";
 
+// Milo and Mivo Spots are built but not in the App Store version yet (3.0, Aug 26).
+// Remove the notes that use this once the update that includes them is live.
+export const comingSoonNote = "Coming in the next update";
+
 export const nav = {
   links: [
     { label: "How It Works", href: "#how-it-works" },
@@ -419,6 +423,7 @@ export const featureCategories = [
   },
   {
     category: "Milo, Your Companion",
+    note: comingSoonNote,
     features: [
       {
         title: "Meet Milo",
@@ -448,6 +453,7 @@ export const featureCategories = [
   },
   {
     category: "Mivo Spots",
+    note: comingSoonNote,
     features: [
       {
         title: "Tap to Start a Place",
@@ -698,6 +704,7 @@ export const miloSpots = {
   eyebrow: "New in Mivo",
   heading: "A little company. A place to put the phone down.",
   sub: "Two new ways to use your phone on purpose — one lives in the app, one lives on your desk.",
+  note: comingSoonNote,
   cards: [
     {
       id: "milo",

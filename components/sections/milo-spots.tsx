@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { ComingSoon } from "@/components/ui/coming-soon";
 import { fadeUp, viewportOnce } from "@/lib/motion";
 import { miloSpots } from "@/data/content";
 
@@ -24,6 +25,9 @@ export function MiloSpots() {
             {miloSpots.heading}
           </h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-ink-muted">{miloSpots.sub}</p>
+          <div className="mt-5 flex justify-center">
+            <ComingSoon>{miloSpots.note}</ComingSoon>
+          </div>
         </motion.div>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-2">
