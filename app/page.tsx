@@ -5,6 +5,7 @@ import { ProcessSteps } from "@/components/sections/process-steps";
 import { Problem } from "@/components/sections/problem";
 import { Features } from "@/components/sections/features";
 import { MiloSpots } from "@/components/sections/milo-spots";
+import { Pricing } from "@/components/sections/pricing";
 import { Experiments } from "@/components/sections/experiments";
 import { PhilosophyQuote } from "@/components/sections/philosophy-quote";
 import { AppStoreReviews } from "@/components/sections/app-store-reviews";
@@ -22,6 +23,7 @@ export default function Home() {
         <Problem />
         <Features />
         <MiloSpots />
+        <Pricing />
         <Experiments />
         <PhilosophyQuote />
         <AppStoreReviews />

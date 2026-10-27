@@ -8,11 +8,11 @@ export const comingSoonNote = "Coming in the next update";
 
 export const nav = {
   links: [
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Features", href: "#features" },
-    { label: "Milo & Spots", href: "#milo-spots" },
-    { label: "Experiments", href: "#experiments" },
-    { label: "Reviews", href: "#reviews" },
+    { label: "How It Works", href: "/#how-it-works" },
+    { label: "Features", href: "/#features" },
+    { label: "Milo & Spots", href: "/#milo-spots" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Shop", href: "/shop" },
   ],
 };
 
@@ -772,15 +772,18 @@ export const finalCta = {
 
 export const footer = {
   product: [
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Features", href: "#features" },
-    { label: "Milo & Spots", href: "#milo-spots" },
-    { label: "Experiments", href: "#experiments" },
-    { label: "Reviews", href: "#reviews" },
+    { label: "How It Works", href: "/#how-it-works" },
+    { label: "Features", href: "/#features" },
+    { label: "Milo & Spots", href: "/#milo-spots" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Shop Spots", href: "/shop" },
+    { label: "Experiments", href: "/#experiments" },
+    { label: "Reviews", href: "/#reviews" },
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Use", href: "/terms" },
+    { label: "Shipping & Returns", href: "/shipping-returns" },
     { label: "Support", href: "/support" },
   ],
   contact: {

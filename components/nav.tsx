@@ -14,7 +14,7 @@ export function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/10 bg-bg/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 sm:px-8">
-        <Link href="#top" className="flex items-center gap-2.5">
+        <Link href="/" className="flex items-center gap-2.5">
           <Image
             src="/images/mivo-logo.png"
             alt="Mivo"
@@ -28,13 +28,13 @@ export function Nav() {
 
         <nav className="hidden items-center gap-8 md:flex">
           {nav.links.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm text-ink-body transition-colors hover:text-ink"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -64,14 +64,14 @@ export function Nav() {
           >
             <div className="flex flex-col gap-1 px-6 py-4">
               {nav.links.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className="rounded-lg px-2 py-2.5 text-sm text-ink-body hover:bg-ink/5 hover:text-ink"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
               <Link
                 href={appStoreUrl}
