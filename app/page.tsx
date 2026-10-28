@@ -7,8 +7,8 @@ import { Features } from "@/components/sections/features";
 import { MiloSpots } from "@/components/sections/milo-spots";
 import { Pricing } from "@/components/sections/pricing";
 import { Experiments } from "@/components/sections/experiments";
-import { PhilosophyQuote } from "@/components/sections/philosophy-quote";
 import { AppStoreReviews } from "@/components/sections/app-store-reviews";
+import { PhilosophyQuote } from "@/components/sections/philosophy-quote";
 import { FinalCta } from "@/components/sections/final-cta";
 import { Footer } from "@/components/footer";
 
@@ -25,8 +25,8 @@ export default function Home() {
         <MiloSpots />
         <Pricing />
         <Experiments />
-        <PhilosophyQuote />
         <AppStoreReviews />
+        <PhilosophyQuote />
         <FinalCta />
       </main>
       <Footer />

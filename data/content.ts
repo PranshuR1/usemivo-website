@@ -777,6 +777,7 @@ export const footer = {
     { label: "Milo & Spots", href: "/#milo-spots" },
     { label: "Pricing", href: "/pricing" },
     { label: "Shop Spots", href: "/shop" },
+    { label: "My account", href: "/account" },
     { label: "Experiments", href: "/#experiments" },
     { label: "Reviews", href: "/#reviews" },
   ],

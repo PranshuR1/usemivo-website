@@ -33,7 +33,7 @@ export function DownloadDropdown() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-haspopup="menu"
-        className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-accent px-5 text-sm font-medium text-bg transition-colors hover:bg-accent-deep"
+        className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-espresso px-5 text-sm font-medium text-cream transition-colors hover:bg-espresso-raised"
       >
         Download
         <ChevronDown size={14} className={cn("transition-transform duration-200", open && "rotate-180")} />
@@ -42,7 +42,7 @@ export function DownloadDropdown() {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 top-full mt-2 w-56 overflow-hidden rounded-2xl border border-ink/10 bg-surface shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)]"
+          className="absolute right-0 top-full mt-3 w-60 overflow-hidden rounded-2xl border border-ink/10 bg-surface shadow-lift"
         >
           <Link
             href={appStoreUrl}

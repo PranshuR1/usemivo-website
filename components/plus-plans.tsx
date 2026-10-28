@@ -19,7 +19,7 @@ export function PlusPlans() {
                 {plan.name}
               </h3>
               {plan.badge && (
-                <span className="inline-flex shrink-0 items-center rounded-full bg-accent px-2.5 py-1 text-[11px] font-semibold tracking-wide text-bg">
+                <span className="inline-flex shrink-0 items-center rounded-full bg-accent px-2.5 py-1 text-[11px] font-semibold tracking-wide text-on-accent">
                   {plan.badge}
                 </span>
               )}

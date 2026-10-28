@@ -54,12 +54,12 @@ export function InteractivePhone({ initialTarget }: { initialTarget?: DemoTarget
         onPointerLeave={reduced ? undefined : onPointerLeave}
         style={reduced ? undefined : { rotateX, rotateY }}
         className={cn(
-          "relative rounded-[2.75rem] border border-ink/10 bg-surface/80 p-2 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] backdrop-blur-sm",
+          "relative rounded-[2.75rem] border border-espresso-raised bg-espresso p-2 shadow-[0_50px_90px_-30px_rgb(34_20_11/0.65)]",
           !reduced && "animate-float-slow"
         )}
       >
         <div className="flex min-h-[560px] flex-col rounded-[2.25rem] bg-gradient-to-b from-surface-raised to-surface p-5">
-          <div className="mx-auto mb-4 h-1.5 w-16 shrink-0 rounded-full bg-ink/15" />
+          <div className="mx-auto mb-4 h-5 w-20 shrink-0 rounded-full bg-espresso" />
 
           <div className="flex-1">
             <AnimatePresence mode="wait">

@@ -11,7 +11,7 @@ export function ButtonLink({
 }: {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "dark" | "secondary" | "secondary-dark" | "ghost";
   showArrow?: boolean;
   className?: string;
 }) {
@@ -20,9 +20,12 @@ export function ButtonLink({
 
   const variants = {
     primary:
-      "h-12 px-7 bg-accent text-bg hover:bg-accent-deep shadow-[0_0_0_0_rgba(212,135,42,0)] hover:shadow-[0_8px_30px_-6px_rgba(212,135,42,0.55)]",
+      "h-12 px-7 bg-accent text-on-accent shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_10px_24px_-10px_rgb(212_135_42/0.9)] hover:-translate-y-0.5 hover:brightness-105 hover:shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_16px_30px_-10px_rgb(212_135_42/0.9)]",
+    dark: "h-12 px-7 bg-espresso text-cream hover:-translate-y-0.5 hover:bg-espresso-raised",
     secondary:
-      "h-12 px-7 border border-ink/15 text-ink hover:border-ink/30 hover:bg-ink/5",
+      "h-12 px-7 border border-ink/15 bg-surface text-ink shadow-sm hover:border-ink/30 hover:bg-white",
+    "secondary-dark":
+      "h-12 px-7 border border-cream/20 text-cream hover:border-cream/40 hover:bg-cream/10",
     ghost: "h-auto px-0 text-ink-body hover:text-ink",
   };
 

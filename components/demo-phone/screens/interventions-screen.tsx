@@ -315,7 +315,7 @@ export function InterventionsScreen({
                 <button
                   type="button"
                   onClick={backToIdle}
-                  className="rounded-xl bg-accent py-2.5 text-xs font-medium text-bg"
+                  className="rounded-xl bg-accent py-2.5 text-xs font-medium text-on-accent"
                 >
                   {demoSwap.primaryCta}
                 </button>
@@ -348,7 +348,7 @@ export function InterventionsScreen({
                 <button
                   type="button"
                   onClick={() => setStage("unlockApproved")}
-                  className="mt-3 w-full rounded-xl bg-accent py-2.5 text-xs font-medium text-bg"
+                  className="mt-3 w-full rounded-xl bg-accent py-2.5 text-xs font-medium text-on-accent"
                 >
                   {demoUnlock.submitCta}
                 </button>
@@ -371,7 +371,7 @@ export function InterventionsScreen({
                 <button
                   type="button"
                   onClick={backToIdle}
-                  className="rounded-xl bg-accent py-2.5 text-xs font-medium text-bg"
+                  className="rounded-xl bg-accent py-2.5 text-xs font-medium text-on-accent"
                 >
                   {demoRescue.primaryCta}
                 </button>

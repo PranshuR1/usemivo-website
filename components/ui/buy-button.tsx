@@ -4,6 +4,7 @@ import { useSyncExternalStore } from "react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { salesOpenAt } from "@/data/shop";
+import { getAccountState, getServerAccountState, subscribeToAccount } from "@/lib/mivo-account";
 
 const base =
   "group inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-medium transition-all duration-300";
@@ -15,16 +16,22 @@ const isOpenOnServer = () => false;
 export function BuyButton({ href, className }: { href: string; className?: string }) {
   // The server always renders the closed state, so the page can be cached and still open on time.
   const open = useSyncExternalStore(noSubscription, isOpenNow, isOpenOnServer);
+  const account = useSyncExternalStore(subscribeToAccount, getAccountState, getServerAccountState);
+
+  // Signed in: tag the checkout with the account's id (an opaque id, never an email) so the order
+  // lands in "Orders" on usemivo.app/account.
+  const userId = account.session?.user.id;
+  const checkoutHref = userId ? `${href}${href.includes("?") ? "&" : "?"}client_reference_id=${userId}` : href;
 
   if (open && href) {
     return (
       <a
-        href={href}
+        href={checkoutHref}
         target="_blank"
         rel="noreferrer noopener"
         className={cn(
           base,
-          "bg-accent text-bg hover:bg-accent-deep hover:shadow-[0_8px_30px_-6px_rgba(212,135,42,0.55)]",
+          "bg-accent text-on-accent shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_10px_24px_-10px_rgb(212_135_42/0.9)] hover:brightness-105",
           className
         )}
       >

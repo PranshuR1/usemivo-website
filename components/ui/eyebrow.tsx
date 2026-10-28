@@ -3,21 +3,23 @@ import { cn } from "@/lib/utils";
 export function Eyebrow({
   children,
   className,
-  light = false,
+  onDark = false,
 }: {
   children: React.ReactNode;
   className?: string;
-  light?: boolean;
+  onDark?: boolean;
 }) {
   return (
     <div
       className={cn(
-        "flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]",
-        light ? "text-bg/60" : "text-accent-deep",
+        "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em]",
+        onDark
+          ? "border-cream/15 bg-cream/5 text-accent"
+          : "border-accent/25 bg-accent/10 text-accent-deep",
         className
       )}
     >
-      <span className={cn("h-px w-8", light ? "bg-bg/30" : "bg-accent/40")} />
+      <span className={cn("h-1.5 w-1.5 rounded-full", onDark ? "bg-accent" : "bg-accent-deep")} />
       {children}
     </div>
   );

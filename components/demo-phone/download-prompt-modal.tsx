@@ -36,7 +36,7 @@ export function DownloadPromptModal({ onDismiss }: { onDismiss: () => void }) {
           target="_blank"
           rel="noreferrer noopener"
           onClick={onDismiss}
-          className="mt-4 inline-flex h-11 w-full items-center justify-center rounded-full bg-accent text-sm font-medium text-bg transition-colors hover:bg-accent-deep"
+          className="mt-4 inline-flex h-11 w-full items-center justify-center rounded-full bg-accent text-sm font-medium text-on-accent transition-colors hover:bg-accent-deep"
         >
           {downloadPrompt.cta}
         </a>

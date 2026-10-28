@@ -7,19 +7,14 @@ import { philosophy } from "@/data/content";
 
 export function PhilosophyQuote() {
   return (
-    <section className="relative overflow-x-clip py-32 sm:py-40">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-[110px]" />
-      <Container className="max-w-3xl text-center">
-        <motion.blockquote
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          variants={fadeUp}
-        >
-          <p className="font-display text-3xl italic leading-snug text-ink sm:text-4xl md:text-5xl">
+    <section className="relative overflow-hidden bg-espresso pb-12 pt-28 sm:pt-36">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_60%_at_50%_45%,rgb(212_135_42/0.14),transparent_70%)]" />
+      <Container className="max-w-4xl text-center">
+        <motion.blockquote initial="hidden" whileInView="show" viewport={viewportOnce} variants={fadeUp}>
+          <p className="text-balance font-display text-4xl italic leading-[1.1] text-cream sm:text-6xl">
             &ldquo;{philosophy.quote}&rdquo;
           </p>
-          <footer className="mt-8 text-sm uppercase tracking-[0.2em] text-ink-muted">
+          <footer className="mt-8 text-xs font-medium uppercase tracking-[0.22em] text-cream-muted">
             — {philosophy.attribution}
           </footer>
         </motion.blockquote>
