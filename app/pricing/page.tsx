@@ -11,7 +11,7 @@ import { plusBenefits, plusDisclosure, plusFree, plusNote, pricingFaq } from "@/
 export const metadata: Metadata = {
   title: "Pricing — Mivo",
   description:
-    "Mivo is free to start. Mivo Plus is $6.99 a month, $39.99 a year or $79.99 once. Mivo Spots are $14.99 each or $34.99 for three.",
+    "Mivo is free to start. Mivo Plus is $9.99 a month, $49.99 a year or $99.99 once. Mivo Spots are $14.99 each or $34.99 for three.",
   alternates: { canonical: "/pricing" },
 };
 

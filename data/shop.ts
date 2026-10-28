@@ -47,9 +47,9 @@ export const spotFacts = [
 export const plusNote = comingSoonNote;
 
 export const plusPlans = [
-  { id: "monthly", name: "Monthly", price: 6.99, period: "per month", note: "Cancel any time", badge: null },
-  { id: "annual", name: "Yearly", price: 39.99, period: "per year", note: "7-day free trial", badge: "Best value" },
-  { id: "lifetime", name: "Lifetime", price: 79.99, period: "one time", note: "Pay once, keep it", badge: null },
+  { id: "monthly", name: "Monthly", price: 9.99, period: "per month", note: "Cancel any time", badge: null },
+  { id: "annual", name: "Yearly", price: 49.99, period: "per year", note: "7-day free trial", badge: "Best value" },
+  { id: "lifetime", name: "Lifetime", price: 99.99, period: "one time", note: "Pay once, keep it", badge: null },
 ] as const;
 
 export const plusBenefits = [
