@@ -280,8 +280,8 @@ export function StudySession({ backHref }: { backHref: string }) {
                 <li>Plug the phone in and prop it up across the room.</li>
                 <li>Point it at your hands and desk. Your face is optional.</li>
                 <li>
-                  This page just keeps time. The Mivo app films the session and turns it into
-                  scroll time.
+                  This page just keeps time. In the next Mivo update the app films the session and
+                  turns it into scroll time.
                 </li>
               </ul>
               <button
