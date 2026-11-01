@@ -62,6 +62,25 @@ export default function PrivacyPage() {
         account, and we record which account it belongs to so that nobody else can claim
         it.
       </p>
+      <h2 className="pt-4 font-display text-2xl italic text-ink">
+        Studying and study rooms
+      </h2>
+      <p>
+        When you finish a study session in the Mivo app or on usemivo.app while signed in,
+        we save the task you named, when it started and ended, and how many seconds of it
+        were on video. The video itself stays on your phone and is never uploaded. This is
+        how the app and your account page show the same streak. You can delete your saved
+        study history at any time from your account page, and deleting your account removes
+        it.
+      </p>
+      <p>
+        A study room is an optional link you can open and close. While it is open and you
+        are in a session, anyone who has the link can see your first name, the task if you
+        choose to show it, and how long you have been studying. They never see video, your
+        email or your account. A visitor who chooses to sit with you gives a first name,
+        which we keep only while they are on the page and for at most a day. You can remove
+        a visitor, close the room or change its link whenever you like.
+      </p>
       <p>
         Mivo Plus purchases are handled by Apple. We learn only whether your account has
         Plus, not your payment details.

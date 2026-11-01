@@ -41,12 +41,14 @@ export function Pricing() {
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">Mivo Spots</p>
             <p className="mt-2 font-display text-3xl">
-              {spotProducts
-                .map((p) => `${p.spots === 1 ? "One Spot" : `${p.spots}-pack`} ${usd(p.price)}`)
-                .join("  ·  ")}
+              {`One Spot ${usd(spotProducts[0].price)}  ·  Packs of ${spotProducts
+                .slice(1)
+                .map((p) => p.spots)
+                .join(", ")
+                .replace(/, (\d+)$/, " and $1")} from ${usd(spotProducts[1].price)}`}
             </p>
             <p className="mt-2 text-sm text-cream-muted">
-              NFC stickers you tap with your iPhone. Free shipping on the 3-pack.
+              NFC stickers you tap with your iPhone. Free shipping on packs, and you choose where each Spot goes.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

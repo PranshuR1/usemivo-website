@@ -29,7 +29,7 @@ export type AccountState = {
 export class AccountError extends Error {
   constructor(
     message: string,
-    readonly code: "invalid" | "exists" | "rate" | "auth" | "network" | "server" = "server"
+    readonly code: "invalid" | "exists" | "rate" | "auth" | "network" | "unavailable" | "server" = "server"
   ) {
     super(message);
   }
@@ -211,6 +211,14 @@ function toError(status: number, body: Record<string, unknown> | null) {
   if (status === 429 || lower.includes("rate limit") || lower.includes("rate_limited")) {
     return new AccountError("Too many tries. Wait a minute and try again.", "rate");
   }
+  // Part of the backend that hasn't been switched on yet (its function doesn't exist).
+  if (lower.includes("could not find the function") || lower.includes("schema cache")) {
+    return new AccountError("This part of your account is still being switched on. Please check back soon.", "unavailable");
+  }
+  if (lower.includes("room_full")) return new AccountError("This room is full right now. Try again in a minute.", "invalid");
+  if (lower === "removed") return new AccountError("You were removed from this room.", "invalid");
+  if (lower.includes("name_required")) return new AccountError("Enter a first name.", "invalid");
+  if (lower.includes("session_limit_reached")) return new AccountError("Your account has reached its session limit.", "invalid");
   if (status === 401 || lower.includes("jwt") || lower.includes("authentication_required")) {
     return new AccountError("Your session ended. Please sign in again.", "auth");
   }
@@ -340,3 +348,90 @@ export const fetchMyOrders = () => rpc<SpotOrder[]>("my_spot_orders");
 export type SpotState = { state: "unclaimed" | "yours" | "taken" | "disabled" | "invalid"; claimed_at?: string | null };
 
 export const resolveSpot = (spotId: string) => rpc<SpotState>("resolve_physical_spot", { input_spot_id: spotId });
+
+// --- Study sessions and rooms --------------------------------------------------------------------
+
+// A finished session. "ios" ones were filmed on the phone (recorded_seconds is the video); "web"
+// ones are timer time from usemivo.app/study and carry no video and no scroll time.
+export type StudySession = {
+  id: string;
+  task: string;
+  started_at: string;
+  ended_at: string;
+  recorded_seconds: number;
+  scroll_seconds_earned: number;
+  source: "ios" | "web";
+};
+
+// What the website sends: it can't claim video or scroll time, so those fields aren't here.
+export type NewStudySession = Pick<StudySession, "id" | "task" | "started_at" | "ended_at">;
+
+export type RoomSitter = { id: string; name: string };
+
+export type StudyRoom =
+  | { has_room: false }
+  | {
+      has_room: true;
+      code: string;
+      display_name: string;
+      is_open: boolean;
+      show_task: boolean;
+      studying: boolean;
+      task: string | null;
+      started_at: string | null;
+      sitting: RoomSitter[];
+    };
+
+// What a visitor with the link sees. A closed room and a wrong code answer the same way.
+export type RoomView =
+  | { found: false }
+  | {
+      found: true;
+      now: string; // the server's clock, so the timer is right even if the visitor's clock is off
+      name: string;
+      studying: boolean;
+      task: string | null;
+      started_at: string | null;
+      sitting: string[];
+    };
+
+async function publicRpc<T>(name: string, args: Record<string, unknown>): Promise<T> {
+  return (await call(`/rest/v1/rpc/${name}`, { method: "POST", body: JSON.stringify(args) })) as T;
+}
+
+export const fetchMyStudy = () => rpc<StudySession[]>("my_study_sessions");
+
+export const saveStudySessions = (sessions: NewStudySession[]) =>
+  rpc<{ accepted: number; rejected: number }>("sync_study_sessions", {
+    input_sessions: sessions.map((session) => ({ ...session, source: "web" })),
+  });
+
+export const deleteWebSession = (id: string) => rpc<boolean>("delete_study_session", { input_id: id });
+
+export const deleteStudyHistory = () => rpc<number>("delete_my_study_history");
+
+export const fetchMyRoom = () => rpc<StudyRoom>("my_study_room");
+
+export const ensureRoom = () => rpc<StudyRoom>("ensure_study_room");
+
+export const updateRoom = (changes: { display_name?: string; is_open?: boolean; show_task?: boolean }) =>
+  rpc<StudyRoom>("update_study_room", {
+    input_display_name: changes.display_name ?? null,
+    input_is_open: changes.is_open ?? null,
+    input_show_task: changes.show_task ?? null,
+  });
+
+export const rotateRoomCode = () => rpc<StudyRoom>("rotate_study_room_code");
+
+export const removeSitter = (id: string) => rpc<StudyRoom>("remove_study_room_visitor", { input_visitor_id: id });
+
+export const pingRoom = (task: string, startedAt: number) =>
+  rpc<StudyRoom>("study_room_ping", { input_task: task, input_started_at: new Date(startedAt).toISOString() });
+
+export const endRoomSession = () => rpc<StudyRoom>("study_room_end");
+
+// These two work without an account: the code in the link is the only thing they need.
+export const viewRoom = (code: string) => publicRpc<RoomView>("study_room_view", { input_code: code });
+
+export const sitInRoom = (code: string, visitorId: string, name: string) =>
+  publicRpc<RoomView>("study_room_sit", { input_code: code, input_visitor_id: visitorId, input_name: name });

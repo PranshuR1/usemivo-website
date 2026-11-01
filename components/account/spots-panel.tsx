@@ -130,6 +130,14 @@ function SpotCard({ spot, onChanged }: { spot: MySpot; onChanged: () => void }) 
             <Button variant="secondary" onClick={() => setConfirming(true)}>
               Disconnect
             </Button>
+            {!off && (
+              <Link
+                href={`/study/${encodeURIComponent(spot.spot_id)}`}
+                className="inline-flex h-11 items-center rounded-full border border-ink/15 bg-surface px-6 text-sm font-medium text-ink shadow-sm hover:border-ink/30 hover:bg-white"
+              >
+                Study here
+              </Link>
+            )}
             <a href={help} className="text-sm text-ink-body underline underline-offset-4 hover:text-ink">
               Report a problem
             </a>

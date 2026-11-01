@@ -8,17 +8,28 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { AuthForm } from "@/components/account/auth-form";
 import { SpotsPanel } from "@/components/account/spots-panel";
 import { OrdersPanel } from "@/components/account/orders-panel";
+import { RoomPanel } from "@/components/account/room-panel";
+import { StudyPanel } from "@/components/account/study-panel";
+import { TodayPanel, type TabId } from "@/components/account/today-panel";
 import { PasswordForm, SettingsPanel } from "@/components/account/settings-panel";
 import { getAccountState, getServerAccountState, subscribeToAccount } from "@/lib/mivo-account";
 import { cn } from "@/lib/utils";
 
-const tabs = [
-  { id: "spots", label: "My Spots" },
+const tabs: { id: TabId; label: string }[] = [
+  { id: "today", label: "Today" },
+  { id: "study", label: "Study" },
+  { id: "room", label: "Room" },
+  { id: "spots", label: "Spots" },
   { id: "orders", label: "Orders" },
   { id: "account", label: "Account" },
-] as const;
+];
 
-type TabId = (typeof tabs)[number]["id"];
+// The tab lives in the address (#study), so a refresh or a shared link lands on the same tab.
+function tabFromAddress(): TabId {
+  if (typeof window === "undefined") return "today";
+  const wanted = window.location.hash.slice(1);
+  return tabs.find((item) => item.id === wanted)?.id ?? "today";
+}
 
 function Shell({ eyebrow, title, intro, children }: { eyebrow: string; title: string; intro?: string; children: React.ReactNode }) {
   return (
@@ -42,7 +53,13 @@ function Shell({ eyebrow, title, intro, children }: { eyebrow: string; title: st
 
 export function AccountPage() {
   const account = useSyncExternalStore(subscribeToAccount, getAccountState, getServerAccountState);
-  const [tab, setTab] = useState<TabId>("spots");
+  const [tab, setTabState] = useState<TabId>(tabFromAddress);
+
+  function setTab(next: TabId) {
+    setTabState(next);
+    window.history.replaceState(null, "", `#${next}`);
+    window.scrollTo({ top: 0 });
+  }
 
   if (!account.ready) {
     return (
@@ -78,8 +95,9 @@ export function AccountPage() {
   const first = (session.user.name ?? session.user.email).split(/[\s@]/)[0];
 
   return (
-    <Shell eyebrow="Account" title={`Hi, ${first}.`} intro="Everything about your Mivo Spots in one place.">
-      <div role="tablist" className="mb-8 inline-flex rounded-full bg-ink/5 p-1">
+    <Shell eyebrow="Account" title={`Hi, ${first}.`} intro="Your study, your room, your Spots and your orders in one place.">
+      <div role="tablist" className="-mx-1 mb-8 flex max-w-full overflow-x-auto px-1 pb-1 [scrollbar-width:none]">
+        <div className="inline-flex rounded-full bg-ink/5 p-1">
         {tabs.map((item) => (
           <button
             key={item.id}
@@ -88,15 +106,19 @@ export function AccountPage() {
             aria-selected={tab === item.id}
             onClick={() => setTab(item.id)}
             className={cn(
-              "h-10 rounded-full px-5 text-sm font-medium transition-colors",
+              "h-10 shrink-0 rounded-full px-4 text-sm font-medium transition-colors sm:px-5",
               tab === item.id ? "bg-espresso text-cream shadow-sm" : "text-ink-body hover:text-ink"
             )}
           >
             {item.label}
           </button>
         ))}
+        </div>
       </div>
 
+      {tab === "today" && <TodayPanel onOpen={setTab} />}
+      {tab === "study" && <StudyPanel />}
+      {tab === "room" && <RoomPanel />}
       {tab === "spots" && <SpotsPanel />}
       {tab === "orders" && <OrdersPanel />}
       {tab === "account" && <SettingsPanel session={session} />}

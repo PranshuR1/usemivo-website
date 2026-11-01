@@ -29,7 +29,31 @@ export const spotProducts = [
     badge: "Free shipping",
     checkoutUrl: "https://buy.stripe.com/eVq5kFeH4civ06x9CRgQE01",
   },
+  {
+    id: "pack5",
+    name: "Mivo Spot 5-Pack",
+    kicker: "A home's worth",
+    blurb: "Five Spots for every room you scroll in, at $11.00 each.",
+    price: 54.99,
+    shipping: 0,
+    spots: 5,
+    badge: "Free shipping",
+    checkoutUrl: "https://buy.stripe.com/eVqcN7eH4ber8D302hgQE02",
+  },
+  {
+    id: "pack10",
+    name: "Mivo Spot 10-Pack",
+    kicker: "Share them out",
+    blurb: "Ten Spots for a whole home, a dorm floor or a team, at $10.00 each.",
+    price: 99.99,
+    shipping: 0,
+    spots: 10,
+    badge: "Best price",
+    checkoutUrl: "https://buy.stripe.com/fZu4gB42q96jg5v4ixgQE03",
+  },
 ] as const;
+
+export { blankPlace, spotPlaces } from "./spot-places";
 
 export const spotIncludes = [
   "Each Spot arrives ready to use. Nothing to write or set up on the tag.",
@@ -56,12 +80,13 @@ export const plusPlans = [
 export const plusBenefits = [
   "Replay mode: after your reels, only ones you've seen",
   "Instagram inside Mivo, with dull mode and a daily time limit",
-  "Mivo Clear and Mivo Still",
-  "Weekly experiments and your 30-day forecast",
+  "Messages and search with endless feeds filtered out inside Mivo Clear",
+  "Quiet breaks with Mivo Still",
+  "One weekly experiment: try, review, keep or adjust",
   "Your attention receipt, every day",
 ];
 
-export const plusFree = "The 5-second pause on your protected apps stays free, and so do Milo and Mivo Spots.";
+export const plusFree = "The basic pause, Milo and Spot features stay free. Your starting point and commitment check-ins join them in the next update. Physical Spots are sold separately.";
 
 export const plusDisclosure =
   "Payment is charged to your Apple ID at confirmation. Subscriptions renew automatically unless cancelled at least 24 hours before the period ends, and you can manage or cancel them in Settings > Apple ID > Subscriptions. Lifetime is a one-time purchase.";
@@ -83,7 +108,7 @@ export function perMonthOfYearly() {
 export const pricingFaq = [
   {
     q: "What stays free?",
-    a: "The 5-second pause on your protected apps, Milo and Mivo Spots. Mivo Plus unlocks everything beyond the basic pause.",
+    a: "The basic pause, Milo and Spot features stay free. Your starting point, commitments and completion check-ins are free features in the next update. Plus includes Clear, Still and weekly experiments. Physical Spots are sold separately.",
   },
   {
     q: "How do I buy Mivo Plus?",
@@ -119,6 +144,14 @@ export const shopFaq = [
   {
     q: "What if someone else taps it?",
     a: "Once you claim a Spot it belongs to your account. A tag only holds its Spot number, never your settings, apps or data.",
+  },
+  {
+    q: "Can I choose where each Spot goes?",
+    a: "Yes. Before you check out, pick a place for each Spot, like Desk, Bedside or Car, or leave it as Not sure yet. We note your picks on your order and on the card. A Spot works anywhere, so a pick only helps you tell them apart.",
+  },
+  {
+    q: "Can I choose a Spot's code?",
+    a: "No. Every Spot has its own code, and we assign it when we pack your order. The code stays private until the Spot is in your hands, so nobody else can claim it first.",
   },
   {
     q: "Where can I stick it?",

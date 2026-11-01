@@ -4,13 +4,14 @@ export const windowsDownloadUrl = "https://github.com/PranshuR1/usemivo-website/
 
 // Milo and Mivo Spots are built but not in the App Store version yet (3.0, Aug 26).
 // Remove the notes that use this once the update that includes them is live.
-export const comingSoonNote = "Coming in the next update";
+export const comingSoonNote = "Coming in Mivo 3.1";
 
 export const nav = {
   links: [
     { label: "How It Works", href: "/#how-it-works" },
     { label: "Features", href: "/#features" },
     { label: "Milo & Spots", href: "/#milo-spots" },
+    { label: "What's new", href: "/whats-new" },
     { label: "Pricing", href: "/pricing" },
     { label: "Shop", href: "/shop" },
   ],
@@ -18,8 +19,8 @@ export const nav = {
 
 export const hero = {
   badge: "Now on iOS and macOS",
-  headline: ["Understand your scrolling.", "Change it without guilt."],
-  sub: "Mivo helps you notice missing screen time, recognize your patterns, and make more intentional choices.",
+  headline: ["Keep the useful parts of your phone.", "Follow through on what matters."],
+  sub: "Keep messages and search with endless feeds filtered out inside Mivo Clear. Try one change at a time, and make room for studying, rest, and the things you meant to do.",
   ctaPrimary: "Download Mivo",
   ctaSecondary: "See How It Works",
 };
@@ -278,33 +279,33 @@ export const midCta = {
 };
 
 export const problem = {
-  eyebrow: "The Problem",
-  heading: "Most screen-time apps make things worse, not better.",
-  sub: "They shame, gamify, and nag — instead of simply showing you the truth.",
+  eyebrow: "Where good intentions get stuck",
+  heading: "You had something else in mind for this time.",
+  sub: "A limit can help. A useful next step helps you put that attention toward something you chose.",
   cards: [
     {
-      title: "They shame you",
-      body: "Red warning screens and “you've reached your limit” treat you like a child who can't be trusted.",
+      title: "A message becomes a long scroll",
+      body: "You came to reply to someone. The feed pulled you somewhere else.",
     },
     {
-      title: "They gamify discipline",
-      body: "Streaks, badges, and daily goals turn your mental health into a performance metric.",
+      title: "The task feels too big to start",
+      body: "One small commitment can make it easier to begin studying, writing, or finishing a chore.",
     },
     {
-      title: "They drown you in data",
-      body: "Fourteen charts, hourly breakdowns. More data doesn't create awareness — it creates anxiety.",
+      title: "The chart leaves you wondering what to do",
+      body: "A weekly experiment gives you one change to try, with a review of what happened.",
     },
     {
-      title: "They nag",
-      body: "Guilt notifications every hour. Passive-aggressive reminders that you're failing. Again.",
+      title: "A difficult day derails the plan",
+      body: "Returning can start with a smaller task or a short quiet break. You don't have to catch up.",
     },
     {
-      title: "They block and restrict",
-      body: "Forced timers create friction without creating understanding. You just get angry.",
+      title: "You still need the useful tools",
+      body: "Messages, search, and specific videos have a place in your day. Clear filters social websites inside Mivo.",
     },
     {
-      title: "They miss the point",
-      body: "Screen time is not the enemy. Unconscious use is. No app can fix what it refuses to understand.",
+      title: "Less screen time needs a purpose",
+      body: "The next update brings commitments and completion check-ins alongside your usage, with self-reports and reviewed evidence labeled separately.",
     },
   ],
 };
@@ -595,9 +596,9 @@ export const featureCategories = [
       },
       {
         title: "Experiment Tracking & Results",
-        body: "Mivo records your behavior throughout so you can see real progress.",
+        body: "Review saved Mivo sessions alongside your own check-ins.",
         detail:
-          "Nothing to log by hand — Mivo already has the usage data, so the results are just true, not self-reported.",
+          "Results use saved Mivo sessions and check-ins. Mivo distinguishes observed usage from what you report; a before-and-after comparison cannot establish what caused a change.",
       },
       {
         title: "Before & After Comparisons",
@@ -736,7 +737,7 @@ export const miloSpots = {
 export const experiments = {
   eyebrow: "Experiments",
   heading: "Small, measurable changes.",
-  sub: "Run a focused, seven-day behavior experiment. Track it. Compare before and after. See what actually works for you — not for someone else's idea of productivity.",
+  sub: "Try one change for seven days. Review the observations and how it felt. Keep, adjust, or stop the rule you chose.",
   items: [
     {
       title: "Seven-day experiments",
@@ -775,6 +776,7 @@ export const footer = {
     { label: "How It Works", href: "/#how-it-works" },
     { label: "Features", href: "/#features" },
     { label: "Milo & Spots", href: "/#milo-spots" },
+    { label: "What's new in 3.1", href: "/whats-new" },
     { label: "Pricing", href: "/pricing" },
     { label: "Shop Spots", href: "/shop" },
     { label: "My account", href: "/account" },

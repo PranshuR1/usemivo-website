@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Field, FormError, FormNote } from "@/components/account/field";
-import { AccountError, signOut, updatePassword, type Session } from "@/lib/mivo-account";
+import { AccountError, deleteStudyHistory, signOut, updatePassword, type Session } from "@/lib/mivo-account";
 
 export function PasswordForm({ onDone, heading = "Change your password" }: { onDone?: () => void; heading?: string }) {
   const [password, setPassword] = useState("");
@@ -54,6 +54,59 @@ export function PasswordForm({ onDone, heading = "Change your password" }: { onD
   );
 }
 
+function StudyDataSection() {
+  const [confirming, setConfirming] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [removed, setRemoved] = useState<number | null>(null);
+
+  async function remove() {
+    setBusy(true);
+    setError(null);
+    try {
+      setRemoved(await deleteStudyHistory());
+      setConfirming(false);
+    } catch (caught) {
+      setError(caught instanceof AccountError ? caught.message : "Couldn't delete your study history. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <section className="rounded-3xl border border-ink/10 bg-surface p-6 text-sm leading-relaxed text-ink-body shadow-card sm:p-7">
+      <h3 className="text-lg font-semibold text-ink">Your study data</h3>
+      <p className="mt-2">
+        Finished study sessions (the task, when it started and ended, and how long was on video) are saved to your
+        account so the app and this site show the same streak. The video itself never leaves your phone. Your study room
+        shows only what you choose on the Room tab.
+      </p>
+      <div className="mt-4 space-y-3">
+        {error && <FormError>{error}</FormError>}
+        {removed !== null && (
+          <FormNote>
+            {removed === 0 ? "There was no saved study history to delete." : `Deleted ${removed} saved ${removed === 1 ? "session" : "sessions"}.`} Your phone keeps its own copy.
+          </FormNote>
+        )}
+        {confirming ? (
+          <div className="flex flex-wrap items-center gap-3">
+            <Button variant="danger" busy={busy} onClick={remove}>
+              Yes, delete saved history
+            </Button>
+            <Button variant="ghost" onClick={() => setConfirming(false)} disabled={busy}>
+              Keep it
+            </Button>
+          </div>
+        ) : (
+          <Button variant="secondary" onClick={() => setConfirming(true)}>
+            Delete saved study history
+          </Button>
+        )}
+      </div>
+    </section>
+  );
+}
+
 const providerLabel: Record<string, string> = { email: "Email and password", google: "Google", apple: "Apple" };
 
 export function SettingsPanel({ session }: { session: Session }) {
@@ -93,6 +146,8 @@ export function SettingsPanel({ session }: { session: Session }) {
           </p>
         )}
       </section>
+
+      <StudyDataSection />
 
       <section className="rounded-3xl border border-ink/10 bg-surface p-6 text-sm leading-relaxed text-ink-body shadow-card sm:p-7">
         <h3 className="text-lg font-semibold text-ink">Deleting your account</h3>

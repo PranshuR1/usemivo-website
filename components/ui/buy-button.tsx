@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { salesOpenAt } from "@/data/shop";
 import { getAccountState, getServerAccountState, subscribeToAccount } from "@/lib/mivo-account";
+import { spotPicksReference, withReference } from "@/lib/spot-picks";
 
 const base =
   "group inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-medium transition-all duration-300";
@@ -13,17 +14,28 @@ const noSubscription = () => () => {};
 const isOpenNow = () => Date.now() >= salesOpenAt.getTime();
 const isOpenOnServer = () => false;
 
-export function BuyButton({ href, className }: { href: string; className?: string }) {
+export function BuyButton({
+  href,
+  picks = [],
+  blockedLabel,
+  className,
+}: {
+  href: string;
+  // The place picked for each Spot in the pack, in order (keys from spotPlaces).
+  picks?: readonly string[];
+  // Set while the buyer still has to choose something; the button stays off and shows this instead.
+  blockedLabel?: string;
+  className?: string;
+}) {
   // The server always renders the closed state, so the page can be cached and still open on time.
   const open = useSyncExternalStore(noSubscription, isOpenNow, isOpenOnServer);
   const account = useSyncExternalStore(subscribeToAccount, getAccountState, getServerAccountState);
 
   // Signed in: tag the checkout with the account's id (an opaque id, never an email) so the order
-  // lands in "Orders" on usemivo.app/account.
-  const userId = account.session?.user.id;
-  const checkoutHref = userId ? `${href}${href.includes("?") ? "&" : "?"}client_reference_id=${userId}` : href;
+  // lands in "Orders" on usemivo.app/account. The picked places ride along in the same reference.
+  const checkoutHref = withReference(href, spotPicksReference(account.session?.user.id, picks));
 
-  if (open && href) {
+  if (open && href && !blockedLabel) {
     return (
       <a
         href={checkoutHref}
@@ -41,7 +53,7 @@ export function BuyButton({ href, className }: { href: string; className?: strin
     );
   }
 
-  const label = open ? "Checkout opening soon" : `On sale ${salesOpenAt.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}`;
+  const label = blockedLabel ?? (open ? "Checkout opening soon" : `On sale ${salesOpenAt.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}`);
 
   return (
     <button

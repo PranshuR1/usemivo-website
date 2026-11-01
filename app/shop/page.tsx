@@ -11,7 +11,7 @@ import { shopFaq, spotFacts, spotIncludes, spotProducts } from "@/data/shop";
 export const metadata: Metadata = {
   title: "Shop Mivo Spots — Mivo",
   description:
-    "Mivo Spots are small NFC stickers. Tap one with your iPhone to start a Pause or Focus session. $14.99 each, or $34.99 for three with free shipping.",
+    "Mivo Spots are small NFC stickers. Tap one with your iPhone to start a Pause or Focus session. $14.99 each, or packs of 3, 5 and 10 from $34.99 with free shipping. Pick where each Spot goes.",
   alternates: { canonical: "/shop" },
 };
 

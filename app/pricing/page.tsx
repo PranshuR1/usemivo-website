@@ -11,7 +11,7 @@ import { plusBenefits, plusDisclosure, plusFree, plusNote, pricingFaq } from "@/
 export const metadata: Metadata = {
   title: "Pricing — Mivo",
   description:
-    "Mivo is free to start. Mivo Plus is $9.99 a month, $49.99 a year or $99.99 once. Mivo Spots are $14.99 each or $34.99 for three.",
+    "Mivo is free to start. Mivo Plus is $9.99 a month, $49.99 a year or $99.99 once. Mivo Spots are $14.99 each, or packs of 3, 5 and 10 from $34.99.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -20,7 +20,7 @@ export default function PricingPage() {
     <PageShell
       eyebrow="Pricing"
       title="Free to start. Honest about the rest."
-      intro="The basic pause is free. Mivo Plus unlocks everything beyond it. Spots are a one-time purchase for the places you scroll most."
+      intro="Start with the free pause. Plus adds useful social tools inside Clear, quiet time with Still, and weekly experiments. Physical Spots are an optional one-time purchase."
     >
       <section className="mt-16">
         <div className="flex flex-wrap items-center gap-4">

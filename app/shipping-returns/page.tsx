@@ -28,7 +28,7 @@ export default function ShippingReturnsPage() {
 
       <h2 className={h2}>What shipping costs</h2>
       <p>
-        One Spot is $14.99 plus $2.99 shipping. The 3-pack is $34.99 with free shipping.
+        One Spot is $14.99 plus $2.99 shipping. The 3-pack is $34.99, the 5-pack $54.99 and the 10-pack $99.99, all with free shipping.
         Sales tax, where it is required, is added at checkout and shown before you pay.
       </p>
 

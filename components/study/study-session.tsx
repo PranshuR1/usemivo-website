@@ -1,6 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import Link from "next/link";
+import {
+  endRoomSession,
+  getAccountState,
+  getServerAccountState,
+  pingRoom,
+  subscribeToAccount,
+  type StudySession as SavedSession,
+} from "@/lib/mivo-account";
+import { loadStudy } from "@/components/account/study-data";
+import { pendingCount, queueSession, flushQueue } from "@/lib/study-sync";
+import { mergeTotals, totalsFromSessions, withSession } from "@/lib/study-stats";
 import {
   addSession,
   DAY_THRESHOLD_MS,
@@ -15,14 +27,25 @@ import {
 } from "@/lib/study-session";
 import { renderReceiptPng } from "./receipt-image";
 
-// Everything here stays on the device: no accounts, no requests, nothing uploaded.
+// Signed out, everything here stays on the device: no requests, nothing uploaded. Signed in, each
+// finished session is also saved to the account (the task and the times, nothing else) so the app and
+// the account page show the same streak, and the study room can show that you're studying.
 // Storage is best-effort; if it is blocked the page still works for this visit.
 
 const DAYS_KEY = "mivo.study.days";
 const ACTIVE_KEY = "mivo.study.active";
 
-type Active = { task: string; startedAt: number };
+type Active = { id: string; task: string; startedAt: number };
 type Done = { task: string; startedAt: number; endedAt: number };
+type SaveState = "saving" | "saved" | "waiting" | null;
+
+const HEARTBEAT_MS = 30_000;
+
+function newId(): string {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID();
+  // Older browsers: a version-4 shaped id from random numbers.
+  return "xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx".replace(/x/g, () => Math.floor(Math.random() * 16).toString(16));
+}
 
 function readJson(key: string): unknown {
   try {
@@ -51,11 +74,12 @@ function removeKey(key: string) {
 
 function parseActive(raw: unknown): Active | null {
   if (typeof raw !== "object" || raw === null) return null;
-  const { task, startedAt } = raw as Record<string, unknown>;
+  const { id, task, startedAt } = raw as Record<string, unknown>;
   if (typeof task !== "string" || typeof startedAt !== "number" || !Number.isFinite(startedAt)) {
     return null;
   }
-  return startedAt <= Date.now() ? { task, startedAt } : null;
+  // A session started before ids existed gets one now.
+  return startedAt <= Date.now() ? { id: typeof id === "string" && id ? id : newId(), task, startedAt } : null;
 }
 
 function formatDate(ms: number): string {
@@ -71,10 +95,39 @@ function dayWord(n: number): string {
   return n === 1 ? "1 day" : `${n} days`;
 }
 
+// Signed in: queue the session, try to send it, then let the study room know you're done. Anything
+// that can't be sent right now waits on this device and goes up next time the page loads.
+async function saveToAccount(
+  userId: string,
+  finished: Active,
+  endedAt: number,
+  setSaveState: (state: SaveState) => void,
+  setSaved: React.Dispatch<React.SetStateAction<SavedSession[] | null>>
+) {
+  setSaveState("saving");
+  const session = {
+    id: finished.id,
+    task: finished.task,
+    started_at: new Date(finished.startedAt).toISOString(),
+    ended_at: new Date(endedAt).toISOString(),
+  };
+  queueSession(userId, session);
+  await flushQueue();
+  if (pendingCount() === 0) {
+    setSaveState("saved");
+    setSaved((current) =>
+      current ? withSession(current, { ...session, recorded_seconds: 0, scroll_seconds_earned: 0, source: "web" }) : current
+    );
+  } else {
+    setSaveState("waiting");
+  }
+  endRoomSession().catch(() => {});
+}
+
 const primary = "block w-full rounded-lg bg-accent px-4 py-4 text-[15px] font-bold text-on-accent";
 const secondary = "block w-full rounded-lg bg-surface px-4 py-4 text-[15px] font-bold text-ink";
 
-export function StudySession({ backHref }: { backHref: string }) {
+export function StudySession({ backHref, backLabel = "Back to this Spot" }: { backHref: string; backLabel?: string }) {
   const [ready, setReady] = useState(false);
   const [totals, setTotals] = useState<DayTotals>({});
   const [active, setActive] = useState<Active | null>(null);
@@ -82,7 +135,15 @@ export function StudySession({ backHref }: { backHref: string }) {
   const [draft, setDraft] = useState("");
   const [now, setNow] = useState(() => Date.now());
   const [saveError, setSaveError] = useState(false);
+  const [saveState, setSaveState] = useState<SaveState>(null);
+  // Sessions the account already holds (null until loaded, or when saved study isn't available).
+  const [saved, setSaved] = useState<SavedSession[] | null>(null);
+  // How many people are sitting in the study room while it is live; null when it isn't.
+  const [sitting, setSitting] = useState<number | null>(null);
   const wakeLock = useRef<WakeLockSentinel | null>(null);
+
+  const account = useSyncExternalStore(subscribeToAccount, getAccountState, getServerAccountState);
+  const userId = account.session?.user.id ?? null;
 
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect -- storage only exists in the browser, so it is read after mount */
@@ -92,6 +153,36 @@ export function StudySession({ backHref }: { backHref: string }) {
     setReady(true);
     /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
+
+  useEffect(() => {
+    if (!userId) return;
+    let cancelled = false;
+    loadStudy()
+      .then((sessions) => !cancelled && setSaved(sessions))
+      .catch(() => !cancelled && setSaved(null));
+    return () => {
+      cancelled = true;
+      setSaved(null);
+    };
+  }, [userId]);
+
+  // While a session runs and you're signed in, tell the study room you're still at it. The room
+  // reads a missing signal for two minutes as "not studying", so a closed tab never leaves it live.
+  useEffect(() => {
+    if (!active || !userId) return;
+    let cancelled = false;
+    const beat = () =>
+      pingRoom(active.task, active.startedAt)
+        .then((room) => !cancelled && setSitting(room.has_room && room.is_open ? room.sitting.length : null))
+        .catch(() => {});
+    void beat();
+    const id = window.setInterval(beat, HEARTBEAT_MS);
+    return () => {
+      cancelled = true;
+      window.clearInterval(id);
+      setSitting(null);
+    };
+  }, [active, userId]);
 
   const acquireWakeLock = useCallback(async () => {
     try {
@@ -139,7 +230,7 @@ export function StudySession({ backHref }: { backHref: string }) {
     if (!task) return;
     // Requested inside the tap handler, which is where browsers allow it.
     void acquireWakeLock();
-    const next = { task, startedAt: Date.now() };
+    const next = { id: newId(), task, startedAt: Date.now() };
     writeJson(ACTIVE_KEY, next);
     setNow(next.startedAt);
     setActive(next);
@@ -153,14 +244,16 @@ export function StudySession({ backHref }: { backHref: string }) {
     removeKey(ACTIVE_KEY);
     releaseWakeLock();
     setTotals(nextTotals);
-    setDone({ ...active, endedAt });
+    setDone({ task: active.task, startedAt: active.startedAt, endedAt });
     setActive(null);
+    if (userId) void saveToAccount(userId, active, endedAt, setSaveState, setSaved);
   }
 
   function again() {
     setDone(null);
     setDraft("");
     setSaveError(false);
+    setSaveState(null);
   }
 
   async function saveReceipt() {
@@ -185,8 +278,11 @@ export function StudySession({ backHref }: { backHref: string }) {
     }
   }
 
-  const streak = streakDays(totals, now);
-  const today = totalForDay(totals, now);
+  // Signed in, the account's history (phone sessions included) counts too; per day the larger of the
+  // two is used, so a session that is both on this device and in the account isn't counted twice.
+  const shownTotals = saved ? mergeTotals(totals, totalsFromSessions(saved)) : totals;
+  const streak = streakDays(shownTotals, now);
+  const today = totalForDay(shownTotals, now);
 
   const stats = (
     <dl className="mt-8 grid grid-cols-2 gap-3 text-left">
@@ -200,7 +296,26 @@ export function StudySession({ backHref }: { backHref: string }) {
       </div>
       <p className="col-span-2 text-[13px] leading-relaxed text-ink-muted">
         A block of {DAY_THRESHOLD_MS / 60000} minutes counts for the day, so the streak rewards
-        starting. Kept on this device only.
+        starting.{" "}
+        {userId ? (
+          <>
+            Saved to your account, so the Mivo app and your{" "}
+            <Link href="/account#study" className="text-accent-deep underline underline-offset-4">
+              account page
+            </Link>{" "}
+            show the same streak.
+          </>
+        ) : account.ready ? (
+          <>
+            Kept on this device only.{" "}
+            <Link href="/account" className="text-accent-deep underline underline-offset-4">
+              Sign in
+            </Link>{" "}
+            to keep it on your account and share a study room.
+          </>
+        ) : (
+          "Kept on this device only."
+        )}
       </p>
     </dl>
   );
@@ -224,6 +339,15 @@ export function StudySession({ backHref }: { backHref: string }) {
               <span className="font-bold text-ink">Milo:</span>{" "}
               {miloReceiptLine(today, streak)}
             </p>
+            {saveState && (
+              <p role="status" className="mt-3 text-left text-[13px] text-ink-muted">
+                {saveState === "saving"
+                  ? "Saving to your account…"
+                  : saveState === "saved"
+                    ? "Saved to your account."
+                    : "Saved on this device. It'll be added to your account as soon as it can."}
+              </p>
+            )}
             <div className="mt-6 space-y-3">
               <button type="button" onClick={saveReceipt} className={primary}>
                 Save receipt
@@ -252,6 +376,12 @@ export function StudySession({ backHref }: { backHref: string }) {
             <button type="button" onClick={finish} className={`${primary} mt-10`}>
               Finish
             </button>
+            {sitting !== null && (
+              <p role="status" className="mt-5 text-[14px] text-ink-body">
+                Your study room is live
+                {sitting > 0 ? `, ${sitting === 1 ? "1 person is" : `${sitting} people are`} sitting with you` : ""}.
+              </p>
+            )}
             <p className="mt-4 text-[13px] leading-relaxed text-ink-muted">
               The timer keeps its place if you switch apps or reload this page.
             </p>
@@ -281,7 +411,8 @@ export function StudySession({ backHref }: { backHref: string }) {
                 <li>Point it at your hands and desk. Your face is optional.</li>
                 <li>
                   This page just keeps time. In the next Mivo update the app films the session and
-                  turns it into scroll time.
+                  turns it into scroll time, free for your first 7 days of studying, then part of
+                  Mivo Plus.
                 </li>
               </ul>
               <button
@@ -297,7 +428,7 @@ export function StudySession({ backHref }: { backHref: string }) {
               href={backHref}
               className="mt-8 inline-block text-[14px] text-accent-deep underline underline-offset-4"
             >
-              Back to this Spot
+              {backLabel}
             </a>
           </>
         )}

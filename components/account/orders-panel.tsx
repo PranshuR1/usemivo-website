@@ -11,8 +11,11 @@ import { footer } from "@/data/content";
 import { spotProducts, usd } from "@/data/shop";
 import { cn } from "@/lib/utils";
 
+// Every pack size is stored as item "pack", so the size (spots) picks the product name.
 const itemName = (order: SpotOrder) =>
-  spotProducts.find((product) => product.id === order.item)?.name ?? `Mivo Spots (${order.spots})`;
+  order.item === "other"
+    ? "Mivo order"
+    : spotProducts.find((product) => product.spots === order.spots)?.name ?? `Mivo Spots (${order.spots})`;
 
 const money = (cents: number) => usd(cents / 100);
 
@@ -115,7 +118,7 @@ export function OrdersPanel() {
 
   if (result.status === "error") {
     // Until the order history is switched on in the backend, the lookup function doesn't exist yet.
-    const notReady = /could not find the function|schema cache/i.test(result.error.message);
+    const notReady = result.error.code === "unavailable";
     return notReady ? (
       <div className="rounded-3xl border border-ink/10 bg-surface p-8 text-center shadow-card">
         <h3 className="font-display text-3xl text-ink">Order history is on its way</h3>
