@@ -7,7 +7,7 @@ import { Faq } from "@/components/faq";
 import { ComingSoon } from "@/components/ui/coming-soon";
 import { ButtonLink } from "@/components/ui/button-link";
 import { comingSoonNote } from "@/data/content";
-import { shopFaq, spotFacts, spotIncludes, spotProducts } from "@/data/shop";
+import { salesOpenAt, shopFaq, spotFacts, spotIncludes, spotProducts } from "@/data/shop";
 import { fetchPublicReviews, reviewJsonLd, type ReviewSummary } from "@/lib/spot-reviews";
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ const productJsonLd = (reviews: ReviewSummary) => spotProducts.map((product) => 
     url: "https://usemivo.app/shop",
     price: product.price.toFixed(2),
     priceCurrency: "USD",
-    availability: "https://schema.org/InStock",
+    availability: salesOpenAt === null ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
     shippingDetails: {
       "@type": "OfferShippingDetails",
       shippingRate: { "@type": "MonetaryAmount", value: product.shipping.toFixed(2), currency: "USD" },

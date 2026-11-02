@@ -3,6 +3,7 @@
 import { useSyncExternalStore } from "react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { comingSoonNote } from "@/data/content";
 import { salesOpenAt } from "@/data/shop";
 import { getAccountState, getServerAccountState, subscribeToAccount } from "@/lib/mivo-account";
 import { spotPicksReference, withReference } from "@/lib/spot-picks";
@@ -11,7 +12,7 @@ const base =
   "group inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-medium transition-all duration-300";
 
 const noSubscription = () => () => {};
-const isOpenNow = () => Date.now() >= salesOpenAt.getTime();
+const isOpenNow = () => salesOpenAt !== null && Date.now() >= salesOpenAt.getTime();
 const isOpenOnServer = () => false;
 
 export function BuyButton({
@@ -53,7 +54,12 @@ export function BuyButton({
     );
   }
 
-  const label = blockedLabel ?? (open ? "Checkout opening soon" : `On sale ${salesOpenAt.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}`);
+  // Paused sales win over a missing pick: there is nothing to check out either way.
+  const label =
+    salesOpenAt === null
+      ? comingSoonNote
+      : blockedLabel ??
+        (open ? "Checkout opening soon" : `On sale ${salesOpenAt.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}`);
 
   return (
     <button

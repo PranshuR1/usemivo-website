@@ -1,8 +1,10 @@
 import { comingSoonNote } from "@/data/content";
 
 // Spots go on sale on this date (Georgia, EDT). Before it, every Buy button says so.
-// Moved up from 2026-11-01 on 2026-10-27 at the user's request: the sale is open now.
-export const salesOpenAt = new Date("2026-10-27T00:00:00-04:00");
+// null pauses sales: every Buy button shows comingSoonNote instead.
+// Paused on 2026-11-02 at the user's request until the App Store app can claim Spots
+// (it was open from 2026-10-27). To reopen, set a date here again.
+export const salesOpenAt: Date | null = null;
 
 // Stripe Payment Links. Leave a link empty and its Buy button says checkout is opening soon.
 // Create the links in the Stripe Dashboard (Payment links), then paste each buy.stripe.com URL here.
