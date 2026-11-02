@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Check, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/account/field";
+import { ReviewCard } from "@/components/account/review-card";
 import { useLoad } from "@/components/account/use-load";
 import { fetchMyOrders, type SpotOrder } from "@/lib/mivo-account";
 import { footer } from "@/data/content";
@@ -174,6 +175,7 @@ export function OrdersPanel() {
 
   return (
     <div className="space-y-5">
+      <ReviewCard />
       {orders.map((order) => (
         <OrderCard key={order.order_id} order={order} />
       ))}

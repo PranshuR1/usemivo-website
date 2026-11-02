@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Check } from "lucide-react";
+import Link from "next/link";
+import { Check, Star } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
 import { SpotProducts } from "@/components/spot-products";
 import { Faq } from "@/components/faq";
@@ -7,6 +8,7 @@ import { ComingSoon } from "@/components/ui/coming-soon";
 import { ButtonLink } from "@/components/ui/button-link";
 import { comingSoonNote } from "@/data/content";
 import { shopFaq, spotFacts, spotIncludes, spotProducts } from "@/data/shop";
+import { fetchPublicReviews, reviewJsonLd, type ReviewSummary } from "@/lib/spot-reviews";
 
 export const metadata: Metadata = {
   title: "Shop Mivo Spots — Mivo",
@@ -21,7 +23,11 @@ const steps = [
   { title: "Tap to start", body: "Every tap after that starts the setup you picked. Tap again to end it." },
 ];
 
-const productJsonLd = spotProducts.map((product) => ({
+// Reviews are re-read at most every 10 minutes.
+export const revalidate = 600;
+
+// Every pack holds the same Spot, so each listing carries the same reviews.
+const productJsonLd = (reviews: ReviewSummary) => spotProducts.map((product) => ({
   "@context": "https://schema.org",
   "@type": "Product",
   name: product.name,
@@ -39,9 +45,66 @@ const productJsonLd = spotProducts.map((product) => ({
       shippingDestination: { "@type": "DefinedRegion", addressCountry: "US" },
     },
   },
+  ...reviewJsonLd(reviews),
 }));
 
-export default function ShopPage() {
+const reviewDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+
+function Stars({ rating, size = 16 }: { rating: number; size?: number }) {
+  return (
+    <span className="flex gap-0.5 text-accent-deep" aria-label={`${rating} out of 5 stars`} role="img">
+      {[1, 2, 3, 4, 5].map((n) => (
+        <Star key={n} size={size} className={n <= Math.round(rating) ? "fill-current" : "opacity-30"} aria-hidden />
+      ))}
+    </span>
+  );
+}
+
+function Reviews({ summary }: { summary: ReviewSummary }) {
+  return (
+    <section id="reviews" className="mt-24">
+      <h2 className="font-display text-3xl italic text-ink">Reviews</h2>
+      {summary.count > 0 && summary.average !== null ? (
+        <>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <Stars rating={summary.average} size={20} />
+            <p className="text-sm text-ink-body">
+              <span className="font-semibold text-ink">{summary.average.toFixed(1)}</span> out of 5 ·{" "}
+              {summary.count} {summary.count === 1 ? "review" : "reviews"} from buyers
+            </p>
+          </div>
+          <ul className="mt-8 grid gap-5 sm:grid-cols-2">
+            {summary.reviews.map((review) => (
+              <li key={review.id} className="rounded-3xl border border-ink/10 bg-surface p-6">
+                <Stars rating={review.rating} />
+                {review.body && (
+                  <p className="mt-3 whitespace-pre-line text-[15px] leading-relaxed text-ink-body">{review.body}</p>
+                )}
+                <p className="mt-4 text-sm text-ink-muted">
+                  <span className="font-medium text-ink">{review.display_name}</span> · {reviewDate(review.created_at)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink-body">No reviews yet.</p>
+      )}
+      <p className="mt-6 text-sm text-ink-muted">
+        Only people who bought Spots can review them. Bought some? Rate them from the Orders tab in{" "}
+        <Link href="/account#orders" className="underline underline-offset-4 hover:text-ink">
+          your account
+        </Link>
+        .
+      </p>
+    </section>
+  );
+}
+
+export default async function ShopPage() {
+  const reviews = await fetchPublicReviews();
+
   return (
     <PageShell
       eyebrow="Shop"
@@ -95,6 +158,8 @@ export default function ShopPage() {
         </ol>
       </section>
 
+      <Reviews summary={reviews} />
+
       <section className="mt-24 max-w-3xl">
         <h2 className="font-display text-3xl italic text-ink">Questions</h2>
         <div className="mt-6">
@@ -112,7 +177,7 @@ export default function ShopPage() {
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd(reviews)).replace(/</g, "\\u003c") }}
       />
     </PageShell>
   );

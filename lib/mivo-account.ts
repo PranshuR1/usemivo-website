@@ -4,7 +4,7 @@
 // iPhone app); every call that matters is checked by the signed-in user's own token on the server.
 
 export const SUPABASE_URL = process.env.NEXT_PUBLIC_MIVO_API_URL ?? "https://pgmbqxcshgvznxdbpyre.supabase.co";
-const ANON_KEY =
+export const ANON_KEY =
   process.env.NEXT_PUBLIC_MIVO_ANON_KEY ?? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnbWJxeGNzaGd2em54ZGJweXJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNTM5NDMsImV4cCI6MjA5NTYyOTk0M30.-Q1t6Ao6xDyuxWkdgofn0br2l0WjVVj9YqIOeH3aLT8";
 
 const STORAGE_KEY = "mivo.web.session";
@@ -218,6 +218,12 @@ function toError(status: number, body: Record<string, unknown> | null) {
   if (lower.includes("room_full")) return new AccountError("This room is full right now. Try again in a minute.", "invalid");
   if (lower === "removed") return new AccountError("You were removed from this room.", "invalid");
   if (lower.includes("name_required")) return new AccountError("Enter a first name.", "invalid");
+  if (lower.includes("not_eligible")) {
+    return new AccountError("Reviews open once one of your Spot orders has been mailed.", "invalid");
+  }
+  if (lower.includes("invalid_rating")) return new AccountError("Pick 1 to 5 stars.", "invalid");
+  if (lower.includes("invalid_name")) return new AccountError("Enter a name of up to 40 characters.", "invalid");
+  if (lower.includes("invalid_body")) return new AccountError("Keep your review under 1,000 characters.", "invalid");
   if (lower.includes("session_limit_reached")) return new AccountError("Your account has reached its session limit.", "invalid");
   if (status === 401 || lower.includes("jwt") || lower.includes("authentication_required")) {
     return new AccountError("Your session ended. Please sign in again.", "auth");
@@ -342,6 +348,25 @@ export const fetchMySpots = () => rpc<MySpot[]>("my_physical_spots");
 export const releaseSpot = (spotId: string) => rpc<null>("release_physical_spot", { input_spot_id: spotId });
 
 export const fetchMyOrders = () => rpc<SpotOrder[]>("my_spot_orders");
+
+// Only buyers whose order has been mailed can review. One review per account; saving again replaces it.
+export type MySpotReview = {
+  eligible: boolean;
+  review: {
+    rating: number;
+    body: string;
+    display_name: string;
+    status: "published" | "hidden";
+    updated_at: string;
+  } | null;
+};
+
+export const fetchMyReview = () => rpc<MySpotReview>("my_spot_review");
+
+export const submitReview = (rating: number, body: string, displayName: string) =>
+  rpc<MySpotReview>("submit_spot_review", { input_rating: rating, input_body: body, input_display_name: displayName });
+
+export const deleteMyReview = () => rpc<boolean>("delete_my_spot_review");
 
 // What the registry says an ID is to the signed-in person asking. It never says who owns a Spot
 // someone else has claimed. Failed lookups are throttled per account on the server.
