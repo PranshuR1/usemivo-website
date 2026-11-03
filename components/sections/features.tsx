@@ -19,7 +19,7 @@ import { Container } from "@/components/ui/container";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ComingSoon } from "@/components/ui/coming-soon";
 import { fadeUp, viewportOnce } from "@/lib/motion";
-import { featureCategories, macDownloadUrl } from "@/data/content";
+import { featureCategories, macDownloadUrl, macRelease } from "@/data/content";
 import { cn } from "@/lib/utils";
 import { FeatureExplorerModal } from "@/components/demo-phone/feature-explorer-modal";
 import type { DemoTarget } from "@/components/demo-phone/interactive-phone";
@@ -146,8 +146,8 @@ function MacDownloadBanner() {
   return (
     <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-2xl border border-accent/25 bg-accent/10 p-5 sm:flex-row sm:items-center">
       <div>
-        <p className="text-sm font-medium text-ink">Mivo is also on Mac.</p>
-        <p className="mt-0.5 text-xs text-ink-muted">Free download · macOS</p>
+        <p className="text-sm font-medium text-ink">Mivo for Mac {macRelease.version}, now with study sessions.</p>
+        <p className="mt-0.5 text-xs text-ink-muted">Free download · {macRelease.requires} · {macRelease.size}</p>
       </div>
       <a
         href={macDownloadUrl}

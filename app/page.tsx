@@ -2,6 +2,8 @@ import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
 import { Reality } from "@/components/sections/reality";
 import { ProcessSteps } from "@/components/sections/process-steps";
+import { SellingPoints } from "@/components/sections/selling-points";
+import { StudyEverywhere } from "@/components/sections/study-everywhere";
 import { Problem } from "@/components/sections/problem";
 import { Features } from "@/components/sections/features";
 import { MiloSpots } from "@/components/sections/milo-spots";
@@ -18,14 +20,16 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <SellingPoints />
         <Reality />
+        <AppStoreReviews />
         <ProcessSteps />
-        <Problem />
+        <StudyEverywhere />
         <Features />
         <MiloSpots />
         <Pricing />
+        <Problem />
         <Experiments />
-        <AppStoreReviews />
         <PhilosophyQuote />
         <FinalCta />
       </main>

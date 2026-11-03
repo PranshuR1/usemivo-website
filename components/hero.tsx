@@ -9,6 +9,7 @@ import { fadeUp, fadeUpStagger } from "@/lib/motion";
 import {
   hero,
   appStoreUrl,
+  macDownloadUrl,
   appStoreReviews,
   demoPatterns,
   homeSpotlight,
@@ -60,7 +61,9 @@ export function Hero() {
           className="flex flex-col items-center"
         >
           <motion.div variants={fadeUp}>
-            <Badge>{hero.badge}</Badge>
+            <a href="#study" className="transition-opacity hover:opacity-80">
+              <Badge>{hero.badge}</Badge>
+            </a>
           </motion.div>
 
           <motion.h1
@@ -83,7 +86,7 @@ export function Hero() {
             <ButtonLink href={appStoreUrl} variant="primary">
               {hero.ctaPrimary}
             </ButtonLink>
-            <ButtonLink href="#how-it-works" variant="secondary" showArrow={false}>
+            <ButtonLink href={macDownloadUrl} variant="secondary" showArrow={false}>
               {hero.ctaSecondary}
             </ButtonLink>
           </motion.div>
@@ -112,7 +115,7 @@ export function Hero() {
             <span className="hidden h-1 w-1 rounded-full bg-ink/20 sm:block" />
             <span>Free to download</span>
             <span className="hidden h-1 w-1 rounded-full bg-ink/20 sm:block" />
-            <span>iOS and macOS</span>
+            <span>iPhone, Mac and web</span>
           </motion.div>
         </motion.div>
 

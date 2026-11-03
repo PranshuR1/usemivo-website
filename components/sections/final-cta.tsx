@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button-link";
 import { fadeUp, viewportOnce } from "@/lib/motion";
-import { finalCta, appStoreUrl } from "@/data/content";
+import { finalCta, appStoreUrl, macDownloadUrl } from "@/data/content";
 
 export function FinalCta() {
   return (
@@ -23,9 +23,12 @@ export function FinalCta() {
           </h2>
           <p className="mx-auto mt-5 max-w-md text-lg leading-relaxed text-cream-muted">{finalCta.body}</p>
 
-          <div className="mt-9 flex justify-center">
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
             <ButtonLink href={appStoreUrl} variant="primary">
               Download on the App Store
+            </ButtonLink>
+            <ButtonLink href={macDownloadUrl} variant="secondary-dark" showArrow={false}>
+              Download for Mac
             </ButtonLink>
           </div>
           <p className="mt-4 text-xs uppercase tracking-[0.15em] text-cream-muted">{finalCta.availability}</p>

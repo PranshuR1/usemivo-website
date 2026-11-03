@@ -7,21 +7,38 @@
 import { addSession, dayKey, DAY_THRESHOLD_MS, streakDays, totalForDay, type DayTotals } from "./study-session";
 import type { StudySession } from "./mivo-account";
 
-type Span = Pick<StudySession, "started_at" | "ended_at">;
+type Span = Pick<StudySession, "started_at" | "ended_at"> & Partial<Pick<StudySession, "source" | "focused_seconds">>;
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
+/** The study time a session counts for: a computer session counts only its focused time. */
 export function sessionMs(session: Span): number {
-  return Math.max(0, Date.parse(session.ended_at) - Date.parse(session.started_at));
+  const elapsed = Math.max(0, Date.parse(session.ended_at) - Date.parse(session.started_at));
+  if (session.source !== "desktop") return elapsed;
+  return Math.min(elapsed, Math.max(0, (session.focused_seconds ?? 0) * 1000));
 }
 
-/** Study milliseconds per local day. A session that crosses midnight counts toward both days. */
+/**
+ * Study milliseconds per local day. A session that crosses midnight counts toward both days; a
+ * computer session's focused time is split in proportion, the same as the iPhone and Mac apps.
+ */
 export function totalsFromSessions(sessions: Span[]): DayTotals {
   let totals: DayTotals = {};
   for (const session of sessions) {
     const start = Date.parse(session.started_at);
     const end = Date.parse(session.ended_at);
-    if (Number.isFinite(start) && Number.isFinite(end) && end > start) totals = addSession(totals, start, end);
+    if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) continue;
+    if (session.source !== "desktop") {
+      totals = addSession(totals, start, end);
+      continue;
+    }
+    const counted = sessionMs(session);
+    const spread = addSession({}, start, end);
+    const next: DayTotals = { ...totals };
+    for (const [key, ms] of Object.entries(spread)) {
+      next[key] = (next[key] ?? 0) + Math.round((counted * ms) / (end - start));
+    }
+    totals = next;
   }
   return totals;
 }

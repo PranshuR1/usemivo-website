@@ -1,0 +1,11 @@
+{
+  "version": "1.1",
+  "build": 2,
+  "url": "https://github.com/PranshuR1/usemivo-website/releases/download/mac-v1.1/Mivo.dmg",
+  "minimumSystemVersion": "13.0",
+  "notes": [
+    "Study on your Mac: start a session, see focused time count live, and keep one streak with usemivo.app.",
+    "Study rooms: share one link so friends can sit with you.",
+    "Being offline at login no longer signs you out."
+  ]
+}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Camera, Timer } from "lucide-react";
+import { Camera, Laptop, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/account/field";
 import { useLoad } from "@/components/account/use-load";
@@ -28,6 +28,7 @@ function SessionRow({ session, onDeleted }: { session: StudySession; onDeleted: 
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const filmed = session.source === "ios";
+  const computer = session.source === "desktop";
   const earned = Math.floor(session.scroll_seconds_earned / 60);
 
   async function remove() {
@@ -52,8 +53,8 @@ function SessionRow({ session, onDeleted }: { session: StudySession; onDeleted: 
           </span>
           <span aria-hidden>·</span>
           <span className="inline-flex items-center gap-1">
-            {filmed ? <Camera size={13} /> : <Timer size={13} />}
-            {filmed ? "Filmed on iPhone" : "Web timer"}
+            {filmed ? <Camera size={13} /> : computer ? <Laptop size={13} /> : <Timer size={13} />}
+            {filmed ? "Filmed on iPhone" : computer ? "Focused on a computer" : "Web timer"}
           </span>
           {earned > 0 && (
             <>
@@ -66,7 +67,7 @@ function SessionRow({ session, onDeleted }: { session: StudySession; onDeleted: 
       </div>
       <div className="flex items-center gap-3">
         <span className="font-semibold tabular-nums text-ink">{formatSpan(sessionMs(session))}</span>
-        {!filmed && (
+        {session.source === "web" && (
           <button
             type="button"
             onClick={remove}

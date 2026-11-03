@@ -1,5 +1,7 @@
 export const appStoreUrl = "https://apps.apple.com/us/app/mivo-scrolling/id6762094544";
-export const macDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/v1.0.0/Mivo.dmg";
+export const macDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/mac-v1.1/Mivo.dmg";
+// Keep in step with public/mac/latest.json, which installed Mac apps read to offer the update.
+export const macRelease = { version: "1.1", size: "3 MB", requires: "macOS 13 or later" };
 export const windowsDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/v1.0.0/Mivo-Setup.exe";
 
 // Milo and Mivo Spots are built but not in the App Store version yet (3.0, Aug 26).
@@ -10,7 +12,7 @@ export const nav = {
   links: [
     { label: "How It Works", href: "/#how-it-works" },
     { label: "Features", href: "/#features" },
-    { label: "Milo & Spots", href: "/#milo-spots" },
+    { label: "Study", href: "/#study" },
     { label: "What's new", href: "/whats-new" },
     { label: "Pricing", href: "/pricing" },
     { label: "Shop", href: "/shop" },
@@ -18,12 +20,79 @@ export const nav = {
 };
 
 export const hero = {
-  badge: "Now on iOS and macOS",
-  headline: ["Keep the useful parts of your phone.", "Follow through on what matters."],
-  sub: "Keep messages and search with endless feeds filtered out inside Mivo Clear. Try one change at a time, and make room for studying, rest, and the things you meant to do.",
-  ctaPrimary: "Download Mivo",
-  ctaSecondary: "See How It Works",
+  badge: "New: Mivo for Mac 1.1, with study sessions",
+  headline: ["Scroll on purpose.", "Study first. Scroll after."],
+  sub: "Mivo shows how much you really scroll, opens Instagram, TikTok and YouTube without the endless feed, and counts the time you actually spend studying.",
+  ctaPrimary: "Download for iPhone",
+  ctaSecondary: "Download for Mac",
 };
+
+// The reasons to pick Mivo, shown straight under the hero. Only things people can use today.
+export const sellingPoints = {
+  eyebrow: "Why Mivo",
+  heading: "What makes Mivo different.",
+  items: [
+    {
+      icon: "truth",
+      title: "The real number, not a guess",
+      body: "Guess your screen time first, then see the truth. Most people are off by 2–3×, and watching that gap shrink is the point.",
+    },
+    {
+      icon: "clear",
+      title: "Feeds off. Useful parts on.",
+      body: "Mivo Clear opens Instagram, TikTok and YouTube for messages, search and the video you meant to watch. The endless feed stays out.",
+    },
+    {
+      icon: "study",
+      title: "Study time that actually counts",
+      body: "Start a session on your Mac or in your browser. Only focused minutes count, and one streak follows you everywhere.",
+    },
+    {
+      icon: "pause",
+      title: "A pause, never a lockout",
+      body: "Before a tracked app opens, Mivo asks why. Five seconds turn a reflex into a choice. Scrolling is always allowed.",
+    },
+  ],
+} as const;
+
+// Studying across devices. The Mac app and the web page work today; the iPhone part ships in 3.1.
+export const studyEverywhere = {
+  eyebrow: "Study, synced",
+  heading: "Study on any screen. Keep one streak.",
+  sub: "Name the one thing you're doing and start. Mivo counts the time you actually spend on it, and every session lands in the same history on your account.",
+  mac: {
+    kicker: "Mivo for Mac · Available now",
+    title: "Your Mac knows when you're really studying.",
+    body: "Start a session and watch focused time count live. Docs, PDFs, Quizlet and Canvas count. A feed, a long break or a locked screen doesn't.",
+    points: [
+      "Only totals sync. Window titles and websites stay on your Mac",
+      "Join a session your iPhone started, or start one right there",
+      "Start and finish from the menu bar",
+    ],
+    cta: "Download for Mac",
+  },
+  web: {
+    kicker: "In your browser",
+    title: "No app? Open the study page.",
+    body: "A timer, a receipt and your streak in any browser. Sign in and the session saves to your account.",
+    cta: "Start a session",
+    href: "/study",
+  },
+  room: {
+    kicker: "Study rooms",
+    title: "Friends can sit with you.",
+    body: "Share one link. Friends see your first name, your task if you allow it, and a timer. No video, and no account for them.",
+    cta: "Open your room",
+    href: "/account#room",
+  },
+  iphone: {
+    kicker: "iPhone",
+    title: "Film your desk. Earn your scroll.",
+    body: "Prop your iPhone across the room while you work. Every 3 minutes of verified study earns 1 minute of scroll time, up to 60 a day.",
+    cta: "What's new in 3.1",
+    href: "/whats-new",
+  },
+} as const;
 
 export const heroPhone = {
   greeting: "Good evening,",
@@ -498,6 +567,23 @@ export const featureCategories = [
     category: "Mivo for Mac",
     features: [
       {
+        title: "Study on Your Mac",
+        body: "Start a study session on your Mac, or join one your iPhone started. Focused time counts live, and distraction, breaks or a locked screen don't.",
+        detail:
+          "Mivo knows common study apps and sites (Preview, Word, Google Docs, Quizlet, Canvas and more), and one click counts anything else for the session. Only the totals leave your Mac, never window titles or websites.",
+      },
+      {
+        title: "One Study Streak, Every Device",
+        body: "Sessions from your Mac, usemivo.app and (from 3.1) your iPhone land in one history, with one streak and one week chart.",
+        detail:
+          "A day counts at 10 minutes of study, the same rule everywhere. A computer session counts its focused minutes, not just how long the timer ran.",
+      },
+      {
+        title: "Study Rooms From Your Mac",
+        body: "Open your study room and copy the link. Friends sit with you from any browser and see your timer live.",
+        detail: "Close the room or make a new link at any time. Everyone sitting is sent away when you do.",
+      },
+      {
         title: "Real Cross-Device Sync",
         body: "Your Mac's activity now actually syncs to your account. iPhone Settings → Mivo for Mac shows live stats from your Mac session.",
         detail:
@@ -767,7 +853,7 @@ export const finalCta = {
   eyebrow: "Ready?",
   heading: "Awareness changes behavior.",
   body: "Mivo helps you see your habits clearly enough to choose differently. No shame. No rules. Just honesty.",
-  availability: "Available now · Free to download · iOS",
+  availability: "Available now · Free to download · iPhone and Mac",
   closingLine: "Not wellness. Not discipline.\nJust knowing what you are actually doing with your time.",
 };
 
@@ -775,6 +861,8 @@ export const footer = {
   product: [
     { label: "How It Works", href: "/#how-it-works" },
     { label: "Features", href: "/#features" },
+    { label: "Study", href: "/#study" },
+    { label: "Mivo for Mac", href: "/#mac" },
     { label: "Milo & Spots", href: "/#milo-spots" },
     { label: "What's new in 3.1", href: "/whats-new" },
     { label: "Pricing", href: "/pricing" },

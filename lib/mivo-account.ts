@@ -377,7 +377,8 @@ export const resolveSpot = (spotId: string) => rpc<SpotState>("resolve_physical_
 // --- Study sessions and rooms --------------------------------------------------------------------
 
 // A finished session. "ios" ones were filmed on the phone (recorded_seconds is the video); "web"
-// ones are timer time from usemivo.app/study and carry no video and no scroll time.
+// ones are timer time from usemivo.app/study and carry no video and no scroll time; "desktop" ones
+// ran on a computer (Mivo for Mac) and count only focused_seconds, the time spent on the task.
 export type StudySession = {
   id: string;
   task: string;
@@ -385,7 +386,8 @@ export type StudySession = {
   ended_at: string;
   recorded_seconds: number;
   scroll_seconds_earned: number;
-  source: "ios" | "web";
+  source: "ios" | "web" | "desktop";
+  focused_seconds?: number | null;
 };
 
 // What the website sends: it can't claim video or scroll time, so those fields aren't here.

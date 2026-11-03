@@ -22,6 +22,19 @@ function session(start: number, minutes: number, extra: Partial<StudySession> = 
 }
 
 describe("totalsFromSessions", () => {
+  it("counts only the focused time of a computer session", () => {
+    const totals = totalsFromSessions([session(at(2026, 11, 3, 9), 40, { source: "desktop", focused_seconds: 25 * 60 })]);
+    expect(totals["2026-11-03"]).toBe(25 * MIN);
+  });
+  it("splits a computer session's focused time across midnight in proportion", () => {
+    const totals = totalsFromSessions([session(at(2026, 11, 2, 23), 120, { source: "desktop", focused_seconds: 60 * 60 })]);
+    expect(totals["2026-11-02"]).toBe(30 * MIN);
+    expect(totals["2026-11-03"]).toBe(30 * MIN);
+  });
+  it("treats a computer session with no focused time as nothing studied", () => {
+    const totals = totalsFromSessions([session(at(2026, 11, 3, 9), 40, { source: "desktop", focused_seconds: null })]);
+    expect(totals["2026-11-03"] ?? 0).toBe(0);
+  });
   it("adds sessions on the same day", () => {
     const totals = totalsFromSessions([session(at(2026, 10, 28, 9), 20), session(at(2026, 10, 28, 15), 15)]);
     expect(totals["2026-10-28"]).toBe(35 * MIN);

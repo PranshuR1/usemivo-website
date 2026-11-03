@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
-import { appStoreUrl, macDownloadUrl, windowsDownloadUrl } from "@/data/content";
+import { appStoreUrl, macDownloadUrl, macRelease, windowsDownloadUrl } from "@/data/content";
 import { cn } from "@/lib/utils";
 
 export function DownloadDropdown() {
@@ -63,7 +63,7 @@ export function DownloadDropdown() {
             className="flex flex-col gap-0.5 border-t border-ink/10 px-4 py-3 transition-colors hover:bg-ink/5"
           >
             <span className="text-sm font-medium text-ink">macOS</span>
-            <span className="text-xs text-ink-muted">Download the Mac app</span>
+            <span className="text-xs text-ink-muted">Version {macRelease.version} · now with study sessions</span>
           </Link>
           <Link
             href={windowsDownloadUrl}
