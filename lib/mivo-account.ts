@@ -218,12 +218,6 @@ function toError(status: number, body: Record<string, unknown> | null) {
   if (lower.includes("room_full")) return new AccountError("This room is full right now. Try again in a minute.", "invalid");
   if (lower === "removed") return new AccountError("You were removed from this room.", "invalid");
   if (lower.includes("name_required")) return new AccountError("Enter a first name.", "invalid");
-  if (lower.includes("not_eligible")) {
-    return new AccountError("Reviews open once one of your Spot orders has been mailed.", "invalid");
-  }
-  if (lower.includes("invalid_rating")) return new AccountError("Pick 1 to 5 stars.", "invalid");
-  if (lower.includes("invalid_name")) return new AccountError("Enter a name of up to 40 characters.", "invalid");
-  if (lower.includes("invalid_body")) return new AccountError("Keep your review under 1,000 characters.", "invalid");
   if (lower.includes("session_limit_reached")) return new AccountError("Your account has reached its session limit.", "invalid");
   if (status === 401 || lower.includes("jwt") || lower.includes("authentication_required")) {
     return new AccountError("Your session ended. Please sign in again.", "auth");
@@ -318,61 +312,6 @@ async function rpc<T>(name: string, args: Record<string, unknown> = {}): Promise
   const token = await accessToken();
   return (await call(`/rest/v1/rpc/${name}`, { method: "POST", token, body: JSON.stringify(args) })) as T;
 }
-
-// --- Spots and orders --------------------------------------------------------------------------
-
-export type MySpot = {
-  spot_id: string;
-  status: "claimed" | "disabled" | "unclaimed";
-  claimed_at: string | null;
-};
-
-export type SpotOrder = {
-  order_id: string;
-  item: "single" | "pack" | "other";
-  spots: number;
-  amount_subtotal: number;
-  amount_shipping: number;
-  amount_total: number;
-  currency: string;
-  status: "paid" | "mailed" | "delivered" | "refunded" | "cancelled";
-  mailed_at: string | null;
-  tracking_url: string | null;
-  ship_name: string | null;
-  ship_address: string | null;
-  created_at: string;
-};
-
-export const fetchMySpots = () => rpc<MySpot[]>("my_physical_spots");
-
-export const releaseSpot = (spotId: string) => rpc<null>("release_physical_spot", { input_spot_id: spotId });
-
-export const fetchMyOrders = () => rpc<SpotOrder[]>("my_spot_orders");
-
-// Only buyers whose order has been mailed can review. One review per account; saving again replaces it.
-export type MySpotReview = {
-  eligible: boolean;
-  review: {
-    rating: number;
-    body: string;
-    display_name: string;
-    status: "published" | "hidden";
-    updated_at: string;
-  } | null;
-};
-
-export const fetchMyReview = () => rpc<MySpotReview>("my_spot_review");
-
-export const submitReview = (rating: number, body: string, displayName: string) =>
-  rpc<MySpotReview>("submit_spot_review", { input_rating: rating, input_body: body, input_display_name: displayName });
-
-export const deleteMyReview = () => rpc<boolean>("delete_my_spot_review");
-
-// What the registry says an ID is to the signed-in person asking. It never says who owns a Spot
-// someone else has claimed. Failed lookups are throttled per account on the server.
-export type SpotState = { state: "unclaimed" | "yours" | "taken" | "disabled" | "invalid"; claimed_at?: string | null };
-
-export const resolveSpot = (spotId: string) => rpc<SpotState>("resolve_physical_spot", { input_spot_id: spotId });
 
 // --- Study sessions and rooms --------------------------------------------------------------------
 

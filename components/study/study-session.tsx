@@ -127,7 +127,7 @@ async function saveToAccount(
 const primary = "block w-full rounded-lg bg-accent px-4 py-4 text-[15px] font-bold text-on-accent";
 const secondary = "block w-full rounded-lg bg-surface px-4 py-4 text-[15px] font-bold text-ink";
 
-export function StudySession({ backHref, backLabel = "Back to this Spot" }: { backHref: string; backLabel?: string }) {
+export function StudySession({ backHref, backLabel = "Back to your account" }: { backHref: string; backLabel?: string }) {
   const [ready, setReady] = useState(false);
   const [totals, setTotals] = useState<DayTotals>({});
   const [active, setActive] = useState<Active | null>(null);

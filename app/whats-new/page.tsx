@@ -5,11 +5,12 @@ import { PageShell } from "@/components/page-shell";
 import { ComingSoon } from "@/components/ui/coming-soon";
 import { ButtonLink } from "@/components/ui/button-link";
 import { comingInNote, mivoVersion, whatsNew } from "@/data/whats-new";
+import { macDownloadUrl } from "@/data/content";
 
 export const metadata: Metadata = {
   title: `What's new in Mivo ${mivoVersion} — Mivo`,
   description:
-    "Mivo Spots, study sessions that earn scroll time, a dulled Instagram, commitments and weekly experiments, and study rooms: what is coming in Mivo 3.1.",
+    "Study sessions that earn scroll time, a dulled Instagram, commitments and weekly experiments, and study rooms: what is coming in Mivo 3.1.",
   alternates: { canonical: "/whats-new" },
 };
 
@@ -54,8 +55,8 @@ export default function WhatsNewPage() {
         <p className="mt-2 max-w-xl font-display text-3xl">Get Mivo today, and the update arrives on its own.</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <ButtonLink href="/pricing">See pricing</ButtonLink>
-          <ButtonLink href="/shop" variant="secondary-dark" showArrow={false}>
-            Shop Spots
+          <ButtonLink href={macDownloadUrl} variant="secondary-dark" showArrow={false}>
+            Download for Mac
           </ButtonLink>
         </div>
       </section>

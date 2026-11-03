@@ -5,15 +5,6 @@ export const comingInNote = `Coming in Mivo ${mivoVersion}`;
 
 export const whatsNew = [
   {
-    id: "spots",
-    title: "Mivo Spots",
-    tag: "Tap to start",
-    body: "Stick a Spot where you reach for your phone, tap it with your iPhone to claim it, then pick what it starts: Pause Mode, Focus Mode, Intention Check or Awareness Mode.",
-    points: ["Works with a free Mivo account", "Sold separately: $14.99, or packs of 3, 5 and 10", "Choose where each Spot goes when you order"],
-    href: "/shop",
-    cta: "Shop Spots",
-  },
-  {
     id: "study",
     title: "Study sessions that earn scroll time",
     tag: "Study",

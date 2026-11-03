@@ -7,7 +7,7 @@ import { ComingSoon } from "@/components/ui/coming-soon";
 import { ButtonLink } from "@/components/ui/button-link";
 import { PlusPlans } from "@/components/plus-plans";
 import { fadeUp, viewportOnce } from "@/lib/motion";
-import { plusFree, plusNote, spotProducts, usd } from "@/data/shop";
+import { plusFree, plusNote } from "@/data/shop";
 
 export function Pricing() {
   return (
@@ -31,33 +31,11 @@ export function Pricing() {
           <PlusPlans />
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          variants={fadeUp}
-          className="mt-6 flex flex-col items-start justify-between gap-6 rounded-3xl bg-espresso p-8 text-cream shadow-lift sm:flex-row sm:items-center sm:p-10"
-        >
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">Mivo Spots</p>
-            <p className="mt-2 font-display text-3xl">
-              {`One Spot ${usd(spotProducts[0].price)}  ·  Packs of ${spotProducts
-                .slice(1)
-                .map((p) => p.spots)
-                .join(", ")
-                .replace(/, (\d+)$/, " and $1")} from ${usd(spotProducts[1].price)}`}
-            </p>
-            <p className="mt-2 text-sm text-cream-muted">
-              NFC stickers you tap with your iPhone. Free shipping on packs, and you choose where each Spot goes.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <ButtonLink href="/shop">Shop Spots</ButtonLink>
-            <ButtonLink href="/pricing" variant="secondary-dark" showArrow={false}>
-              Full pricing
-            </ButtonLink>
-          </div>
-        </motion.div>
+        <div className="mt-8 flex justify-center">
+          <ButtonLink href="/pricing" variant="secondary" showArrow={false}>
+            Full pricing
+          </ButtonLink>
+        </div>
       </Container>
     </section>
   );

@@ -169,7 +169,7 @@ export function StudyPanel() {
       <section className="rounded-3xl border border-ink/10 bg-surface p-6 shadow-card sm:p-7">
         <h3 className="text-lg font-semibold text-ink">How studying earns scroll time</h3>
         <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm leading-relaxed text-ink-body">
-          <li>Name the one thing you&apos;re doing, in the Mivo app or on a Spot&apos;s page.</li>
+          <li>Name the one thing you&apos;re doing, in the Mivo app or on the study page.</li>
           <li>Prop the phone up across the room. The app films your hands and desk; your face is optional.</li>
           <li>Every 3 minutes on video earns 1 minute of scroll in Instagram inside Mivo, up to 60 a day.</li>
           <li>The website only keeps time. Only the app earns scroll time, because only the app can film.</li>

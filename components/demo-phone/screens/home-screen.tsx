@@ -12,11 +12,10 @@ export type HomeHighlight =
   | "breakdown"
   | "forgotten"
   | "milo"
-  | "spots"
   | "receipt"
   | "forecast";
 
-const cardHighlights: HomeHighlight[] = ["estimate", "breakdown", "forgotten", "milo", "spots", "receipt", "forecast"];
+const cardHighlights: HomeHighlight[] = ["estimate", "breakdown", "forgotten", "milo", "receipt", "forecast"];
 
 const ring = "ring-2 ring-accent shadow-[0_0_20px_-4px_rgba(212,135,42,0.5)]";
 
@@ -104,17 +103,6 @@ export function HomeScreen({ highlight }: { highlight?: HomeHighlight }) {
             </div>
           </div>
           <p className="mt-2.5 text-xs text-ink-body">{homeCards.milo.note}</p>
-        </SpotlightCard>
-      )}
-
-      {highlight === "spots" && (
-        <SpotlightCard>
-          <p className="text-[11px] font-medium uppercase tracking-wider text-accent-deep">
-            {homeCards.spots.label}
-          </p>
-          <p className="mt-1.5 text-2xl font-semibold text-ink">{homeCards.spots.spot}</p>
-          <p className="text-xs text-ink-muted">{homeCards.spots.mode}</p>
-          <p className="mt-2.5 text-xs text-ink-body">{homeCards.spots.note}</p>
         </SpotlightCard>
       )}
 

@@ -1,4 +1,4 @@
-// Pure time and streak logic for the Spot study session page. No DOM, no storage:
+// Pure time and streak logic for the study session page. No DOM, no storage:
 // callers pass in timestamps (ms since epoch) and get plain values back.
 //
 // A "day" is the device's local calendar day. A day counts toward the streak when

@@ -6,7 +6,7 @@ import { SellingPoints } from "@/components/sections/selling-points";
 import { StudyEverywhere } from "@/components/sections/study-everywhere";
 import { Problem } from "@/components/sections/problem";
 import { Features } from "@/components/sections/features";
-import { MiloSpots } from "@/components/sections/milo-spots";
+import { Milo } from "@/components/sections/milo";
 import { Pricing } from "@/components/sections/pricing";
 import { Experiments } from "@/components/sections/experiments";
 import { AppStoreReviews } from "@/components/sections/app-store-reviews";
@@ -26,7 +26,7 @@ export default function Home() {
         <ProcessSteps />
         <StudyEverywhere />
         <Features />
-        <MiloSpots />
+        <Milo />
         <Pricing />
         <Problem />
         <Experiments />

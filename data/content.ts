@@ -4,7 +4,7 @@ export const macDownloadUrl = "https://github.com/PranshuR1/usemivo-website/rele
 export const macRelease = { version: "1.1", size: "3 MB", requires: "macOS 13 or later" };
 export const windowsDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/v1.0.0/Mivo-Setup.exe";
 
-// Milo and Mivo Spots are built but not in the App Store version yet (3.0, Aug 26).
+// Milo is built but not in the iPhone App Store version yet (3.0, Aug 26).
 // Remove the notes that use this once the update that includes them is live.
 export const comingSoonNote = "Coming in Mivo 3.1";
 
@@ -15,7 +15,6 @@ export const nav = {
     { label: "Study", href: "/#study" },
     { label: "What's new", href: "/whats-new" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Shop", href: "/shop" },
   ],
 };
 
@@ -240,12 +239,6 @@ export const homeCards = {
     name: "Milo",
     line: "Almost at today's line. No pressure.",
     note: "A few quiet words, only when something stands out.",
-  },
-  spots: {
-    label: "Mivo Spots",
-    spot: "Desk",
-    mode: "Focus Mode · 45 min",
-    note: "Tap your Mivo Spot to start. Tap it again to end it.",
   },
   receipt: {
     label: "Attention Receipt",
@@ -522,48 +515,6 @@ export const featureCategories = [
     ],
   },
   {
-    category: "Mivo Spots",
-    note: comingSoonNote,
-    features: [
-      {
-        title: "Tap to Start a Place",
-        body: "A Mivo Spot is a small NFC tag for a place — your desk, your bedside, the car. Tap it with your iPhone and that place's setup begins.",
-        detail:
-          "Each Spot is programmed before it ships with a single link and nothing else: no apps, no name, no personal data. Your first tap connects it to your account; every tap after that starts it, and tapping again ends it.",
-      },
-      {
-        title: "Four Ways to Use a Spot",
-        body: "Pause Mode, Focus Mode, Intention Check, or Awareness Mode — each place gets the nudge that fits it.",
-        detail:
-          "Pause Mode adds Mivo's breathing pause before the Spot's apps open. Focus Mode shields them for the whole timer. Intention Check asks what you came here to do, once. Awareness Mode blocks nothing and just records the time.",
-      },
-      {
-        title: "Friction, Never a Lockout",
-        body: "Spots add awareness and a little friction. They don't lock you out of your phone.",
-        detail:
-          "One Spot runs at a time, and a Spot with no timer ends itself after 12 hours, so a forgotten Spot can't keep your apps shielded.",
-      },
-      {
-        title: "Skip the Banner",
-        body: "iOS shows a banner whenever a tag is read. A quick Shortcuts automation can make a tap start your Spot with no banner at all.",
-        detail:
-          "Apple doesn't let apps skip the banner themselves, so Mivo walks you through the four Shortcuts steps (NFC trigger, Tap a Mivo Spot, Run Immediately) after your first setup.",
-      },
-      {
-        title: "Honest Spot Summaries",
-        body: "After a Spot, Mivo shows how it went — and says “not measured” rather than showing zero when it can't see.",
-        detail:
-          "iOS reports app use to Mivo in steps, so Spot times are “close, not exact,” and the summary says so. Comparisons against your usual only appear after three earlier measured sessions in the same Spot.",
-      },
-      {
-        title: "A Spot Is Yours",
-        body: "Each Mivo Spot connects to one account. Disconnect it and it can be set up again or passed on.",
-        detail:
-          "Mivo never reveals who owns a Spot that's already taken. Your Spot's settings live on your phone, so a Desk Spot can become a Sleep Spot without touching the tag.",
-      },
-    ],
-  },
-  {
     category: "Mivo for Mac",
     features: [
       {
@@ -787,37 +738,22 @@ export const featureCategories = [
   },
 ];
 
-export const miloSpots = {
-  eyebrow: "New in Mivo",
-  heading: "A little company. A place to put the phone down.",
-  sub: "Two new ways to use your phone on purpose — one lives in the app, one lives on your desk.",
+// Milo on the home page. He is on the Mac app today; the iPhone version ships in 3.1.
+export const milo = {
+  eyebrow: "Your companion",
+  heading: "A little company, never a nag.",
+  sub: "Milo is a small meerkat who keeps you company through your pauses and your study sessions.",
   note: comingSoonNote,
-  cards: [
-    {
-      id: "milo",
-      kicker: "Companion",
-      title: "Meet Milo.",
-      body: "A small meerkat who keeps you company through your pauses — a few quiet words when something stands out, never a nag.",
-      points: [
-        "Speaks at a pace you choose: Rarely, Balanced, or Often",
-        "Walks across your tabs while Mivo is open",
-        "Shows up in your Lock Screen and Dynamic Island during a session",
-      ],
-      footnote: "iOS won't let any app draw over other apps, so Milo only appears in Mivo and its Live Activities.",
-    },
-    {
-      id: "spots",
-      kicker: "Mivo Spots",
-      title: "Tap a place to start it.",
-      body: "A small NFC tag for your desk, your bedside, or the car. Tap it with your iPhone and that place's setup begins — tap again to end it.",
-      points: [
-        "Pause Mode, Focus Mode, Intention Check, or Awareness Mode",
-        "Friction and awareness, never a lockout",
-        "Connects to your account on the first tap, and nothing else is stored on the tag",
-      ],
-      footnote: "Needs an iPhone with NFC. Spot times are close, not exact — iOS reports app use in steps.",
-    },
+  kicker: "Companion",
+  title: "Meet Milo.",
+  body: "A few quiet words when something stands out, and nothing when it doesn't. Milo notices a good stretch of focus, a late night or a long drift, and says so kindly.",
+  points: [
+    "Speaks at a pace you choose: Rarely, Balanced, or Often",
+    "Walks across your tabs while Mivo is open",
+    "Shows up in your Lock Screen and Dynamic Island during a session",
+    "On your Mac today: wanders the Mivo window and cheers a finished focus session",
   ],
+  footnote: "iOS won't let any app draw over other apps, so on iPhone Milo only appears in Mivo and its Live Activities.",
 };
 
 export const experiments = {
@@ -863,10 +799,9 @@ export const footer = {
     { label: "Features", href: "/#features" },
     { label: "Study", href: "/#study" },
     { label: "Mivo for Mac", href: "/#mac" },
-    { label: "Milo & Spots", href: "/#milo-spots" },
+    { label: "Milo", href: "/#milo" },
     { label: "What's new in 3.1", href: "/whats-new" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Shop Spots", href: "/shop" },
     { label: "My account", href: "/account" },
     { label: "Experiments", href: "/#experiments" },
     { label: "Reviews", href: "/#reviews" },
@@ -874,7 +809,6 @@ export const footer = {
   legal: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Use", href: "/terms" },
-    { label: "Shipping & Returns", href: "/shipping-returns" },
     { label: "Support", href: "/support" },
   ],
   contact: {

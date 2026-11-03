@@ -53,13 +53,6 @@ const featureTarget: Record<string, DemoTarget> = {
   "Milo on Your Lock Screen": { tab: "home", highlight: "liveTime" },
   "Milo Is Honest About What He Can't See": { tab: "settings", highlight: "Companion" },
 
-  // Mivo Spots are physical NFC tags, which a web preview can't recreate — Home shows the Spot card
-  "Tap to Start a Place": { tab: "home", highlight: "spots" },
-  "Four Ways to Use a Spot": { tab: "home", highlight: "spots" },
-  "Friction, Never a Lockout": { tab: "home", highlight: "spots" },
-  "Skip the Banner": { tab: "home", highlight: "spots" },
-  "Honest Spot Summaries": { tab: "home", highlight: "spots" },
-  "A Spot Is Yours": { tab: "home", highlight: "spots" },
 
   // Mivo for Mac — only the two cross-device Settings rows have a real iPhone-side screen;
   // the rest are Mac-app-native and land on a sensible default (their detail text says so)

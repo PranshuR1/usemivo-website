@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/s/", "/spot/", "/study", "/room/", "/keyholder", "/account"] },
+    rules: { userAgent: "*", allow: "/", disallow: ["/study", "/room/", "/keyholder", "/account"] },
     sitemap: "https://usemivo.app/sitemap.xml",
   };
 }

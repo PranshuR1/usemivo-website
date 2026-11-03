@@ -6,8 +6,6 @@ import { Footer } from "@/components/footer";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { AuthForm } from "@/components/account/auth-form";
-import { SpotsPanel } from "@/components/account/spots-panel";
-import { OrdersPanel } from "@/components/account/orders-panel";
 import { RoomPanel } from "@/components/account/room-panel";
 import { StudyPanel } from "@/components/account/study-panel";
 import { TodayPanel, type TabId } from "@/components/account/today-panel";
@@ -19,8 +17,6 @@ const tabs: { id: TabId; label: string }[] = [
   { id: "today", label: "Today" },
   { id: "study", label: "Study" },
   { id: "room", label: "Room" },
-  { id: "spots", label: "Spots" },
-  { id: "orders", label: "Orders" },
   { id: "account", label: "Account" },
 ];
 
@@ -74,7 +70,7 @@ export function AccountPage() {
       <Shell
         eyebrow="Account"
         title="Your Mivo account."
-        intro="Sign in to see your Spots, track your orders and manage your account. It's the same account you use in the Mivo app."
+        intro="Sign in to see your study history, open your study room and manage your account. It's the same account you use in the Mivo app."
       >
         <AuthForm notice={account.notice} />
       </Shell>
@@ -95,7 +91,7 @@ export function AccountPage() {
   const first = (session.user.name ?? session.user.email).split(/[\s@]/)[0];
 
   return (
-    <Shell eyebrow="Account" title={`Hi, ${first}.`} intro="Your study, your room, your Spots and your orders in one place.">
+    <Shell eyebrow="Account" title={`Hi, ${first}.`} intro="Your study, your streak and your room in one place.">
       <div role="tablist" className="-mx-1 mb-8 flex max-w-full overflow-x-auto px-1 pb-1 [scrollbar-width:none]">
         <div className="inline-flex rounded-full bg-ink/5 p-1">
         {tabs.map((item) => (
@@ -119,8 +115,6 @@ export function AccountPage() {
       {tab === "today" && <TodayPanel onOpen={setTab} />}
       {tab === "study" && <StudyPanel />}
       {tab === "room" && <RoomPanel />}
-      {tab === "spots" && <SpotsPanel />}
-      {tab === "orders" && <OrdersPanel />}
       {tab === "account" && <SettingsPanel session={session} />}
     </Shell>
   );

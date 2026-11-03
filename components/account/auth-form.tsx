@@ -102,7 +102,7 @@ export function AuthForm({ notice }: { notice: string | null }) {
       <h2 className="font-display text-3xl text-ink">{heading}</h2>
       {mode === "register" && (
         <p className="mt-2 text-sm leading-relaxed text-ink-body">
-          This is the same account you use in the Mivo app, so your Spots and orders stay together.
+          This is the same account you use in the Mivo app on iPhone and Mac, so your study history stays together.
         </p>
       )}
 

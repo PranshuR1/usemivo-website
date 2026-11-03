@@ -17,14 +17,6 @@ export default function SupportPage() {
         day or two.
       </p>
 
-      <h2 className={h2}>Questions about a Spots order</h2>
-      <p>
-        Write from the email address you used at checkout and tell us what is wrong:
-        a Spot that does not scan, an order that has not arrived, or an address to fix.
-        Orders are mailed within 3 business days, and the details are on the
-        Shipping &amp; Returns page.
-      </p>
-
       <h2 className={h2}>Questions about Mivo Plus</h2>
       <p>
         Plus is billed by Apple. You can manage or cancel it in Settings &gt; Apple ID &gt;

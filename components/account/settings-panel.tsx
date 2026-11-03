@@ -152,8 +152,7 @@ export function SettingsPanel({ session }: { session: Session }) {
       <section className="rounded-3xl border border-ink/10 bg-surface p-6 text-sm leading-relaxed text-ink-body shadow-card sm:p-7">
         <h3 className="text-lg font-semibold text-ink">Deleting your account</h3>
         <p className="mt-2">
-          You can delete your account and all of its data from the Mivo app under Settings, Account. Deleting it frees
-          any Spots connected to it. See our{" "}
+          You can delete your account and all of its data from the Mivo app under Settings, Account. See our{" "}
           <Link href="/privacy" className="text-accent-deep underline underline-offset-4">
             Privacy Policy
           </Link>{" "}

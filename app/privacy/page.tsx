@@ -37,32 +37,6 @@ export default function PrivacyPage() {
         , including the Limited Use requirements.
       </p>
       <h2 className="pt-4 font-display text-2xl italic text-ink">
-        Buying a Mivo Spot
-      </h2>
-      <p>
-        When you order a Spot on usemivo.app we collect your name, email address,
-        shipping address and, if you give it, your phone number. We use them to mail your
-        order, send your receipt and help if something goes wrong. We keep order records
-        for as long as tax and accounting rules require.
-      </p>
-      <p>
-        Payments are processed by Stripe. Your card details go to Stripe and never reach
-        us. Stripe&apos;s use of your information is described in its{" "}
-        <a
-          href="https://stripe.com/privacy"
-          className="text-accent-deep underline underline-offset-4"
-        >
-          privacy policy
-        </a>
-        . We do not sell order information or use it for advertising.
-      </p>
-      <p>
-        A Spot itself stores only its Spot number. It holds no name, settings, apps or
-        usage data. When you tap a Spot for the first time it is linked to your Mivo
-        account, and we record which account it belongs to so that nobody else can claim
-        it.
-      </p>
-      <h2 className="pt-4 font-display text-2xl italic text-ink">
         Studying and study rooms
       </h2>
       <p>

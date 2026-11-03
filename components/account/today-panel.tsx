@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Nfc, Package, Users } from "lucide-react";
+import { ArrowRight, Laptop, Users } from "lucide-react";
 import { useLoad } from "@/components/account/use-load";
 import { loadStudy } from "@/components/account/study-data";
 import { WeekBars } from "@/components/account/week-bars";
-import { fetchMyOrders, fetchMyRoom, fetchMySpots } from "@/lib/mivo-account";
+import { fetchMyRoom } from "@/lib/mivo-account";
 import { formatSpan, summarize, totalsFromSessions, weekBars } from "@/lib/study-stats";
-import { footer } from "@/data/content";
+import { footer, macDownloadUrl, macRelease } from "@/data/content";
 
-export type TabId = "today" | "study" | "room" | "spots" | "orders" | "account";
+export type TabId = "today" | "study" | "room" | "account";
 
 const card = "rounded-3xl border border-ink/10 bg-surface p-6 shadow-card sm:p-7";
 
@@ -27,21 +27,11 @@ function CardLink({ onClick, children }: { onClick: () => void; children: React.
   );
 }
 
-const statusWord: Record<string, string> = {
-  paid: "Paid, getting ready to mail",
-  mailed: "On its way",
-  delivered: "Delivered",
-  refunded: "Refunded",
-  cancelled: "Cancelled",
-};
-
-// The first thing after sign-in: where your streak is, whether your room is live, and what's going on
-// with your Spots and orders. Each card loads on its own, so a part that isn't ready never blocks the rest.
+// The first thing after sign-in: where your streak is and whether your room is live. Each card loads on
+// its own, so a part that isn't ready never blocks the rest.
 export function TodayPanel({ onOpen }: { onOpen: (tab: TabId) => void }) {
   const study = useLoad(loadStudy, 0);
   const room = useLoad(fetchMyRoom, 0);
-  const spots = useLoad(fetchMySpots, 0);
-  const orders = useLoad(fetchMyOrders, 0);
   const [now] = useState(() => Date.now());
 
   const sessions = study.status === "ready" ? study.data : null;
@@ -118,49 +108,21 @@ export function TodayPanel({ onOpen }: { onOpen: (tab: TabId) => void }) {
 
         <section className={card}>
           <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent/15 text-accent-deep">
-            <Nfc size={20} />
+            <Laptop size={20} />
           </span>
-          <h3 className="mt-4 text-lg font-semibold text-ink">Spots</h3>
+          <h3 className="mt-4 text-lg font-semibold text-ink">Mivo for Mac</h3>
           <p className="mt-1 text-sm leading-relaxed text-ink-body">
-            {spots.status === "ready"
-              ? spots.data.length
-                ? `${spots.data.length} connected to your account.`
-                : "None connected yet. Tap one with your iPhone to connect it."
-              : spots.status === "loading"
-                ? "Loading…"
-                : "Couldn't load your Spots right now."}
+            Study on your Mac and only focused minutes count. Sessions land in this history and your streak.
           </p>
-          <CardLink onClick={() => onOpen("spots")}>Manage Spots</CardLink>
+          <a
+            href={macDownloadUrl}
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-deep hover:text-ink"
+          >
+            Download {macRelease.version}
+            <ArrowRight size={14} />
+          </a>
         </section>
       </div>
-
-      <section className={card}>
-        <div className="flex items-start gap-4">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent/15 text-accent-deep">
-            <Package size={20} />
-          </span>
-          <div>
-            <h3 className="text-lg font-semibold text-ink">Orders</h3>
-            {orders.status === "ready" && orders.data.length > 0 ? (
-              <p className="mt-1 text-sm leading-relaxed text-ink-body">
-                Latest: {statusWord[orders.data[0].status] ?? orders.data[0].status}.{" "}
-                {orders.data.length > 1 && `${orders.data.length} orders in all.`}
-              </p>
-            ) : orders.status === "error" && orders.error.code === "unavailable" ? (
-              <p className="mt-1 text-sm leading-relaxed text-ink-body">Order tracking is on its way.</p>
-            ) : (
-              <p className="mt-1 text-sm leading-relaxed text-ink-body">
-                No orders on this account.{" "}
-                <Link href="/shop" className="underline underline-offset-4 hover:text-ink">
-                  Shop Mivo Spots
-                </Link>
-                .
-              </p>
-            )}
-            <CardLink onClick={() => onOpen("orders")}>See orders</CardLink>
-          </div>
-        </div>
-      </section>
 
       <p className="px-1 text-sm leading-relaxed text-ink-muted">
         Questions about your account? Email{" "}
