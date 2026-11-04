@@ -46,7 +46,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geist.variable} ${instrumentSerif.variable}`}>
+    // data-scroll-behavior: globals.css sets smooth scrolling for in-page links. Since
+    // Next.js 16 that also applied to page changes, so a nav click left the new page
+    // half-scrolled. This attribute makes Next jump instantly on page changes again.
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${geist.variable} ${instrumentSerif.variable}`}
+    >
       <body className="min-h-screen bg-bg font-sans text-ink antialiased">
         <AccountBootstrap />
         {children}
