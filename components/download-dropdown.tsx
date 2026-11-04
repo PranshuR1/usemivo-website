@@ -52,7 +52,7 @@ export function DownloadDropdown() {
             role="menuitem"
             className="flex flex-col gap-0.5 px-4 py-3 transition-colors hover:bg-ink/5"
           >
-            <span className="text-sm font-medium text-ink">iOS</span>
+            <span className="text-sm font-medium text-ink">iPhone</span>
             <span className="text-xs text-ink-muted">Download on the App Store</span>
           </Link>
           <Link
@@ -62,7 +62,7 @@ export function DownloadDropdown() {
             role="menuitem"
             className="flex flex-col gap-0.5 border-t border-ink/10 px-4 py-3 transition-colors hover:bg-ink/5"
           >
-            <span className="text-sm font-medium text-ink">macOS</span>
+            <span className="text-sm font-medium text-ink">Mac</span>
             <span className="text-xs text-ink-muted">Version {macRelease.version} · now with study sessions</span>
           </Link>
           <Link

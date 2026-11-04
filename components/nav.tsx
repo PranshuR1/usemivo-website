@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { nav, appStoreUrl, macDownloadUrl, windowsDownloadUrl } from "@/data/content";
+import { nav, appStoreUrl, macDownloadUrl } from "@/data/content";
 import { DownloadDropdown } from "./download-dropdown";
 
 export function Nav() {
@@ -94,7 +94,7 @@ export function Nav() {
                   onClick={() => setOpen(false)}
                   className="mt-2 inline-flex h-11 items-center justify-center rounded-full bg-accent text-sm font-medium text-on-accent"
                 >
-                  Download for iOS
+                  Download for iPhone
                 </Link>
                 <Link
                   href={macDownloadUrl}
@@ -102,15 +102,7 @@ export function Nav() {
                   onClick={() => setOpen(false)}
                   className="inline-flex h-11 items-center justify-center rounded-full border border-ink/15 text-sm font-medium text-ink hover:bg-ink/5"
                 >
-                  Download for macOS
-                </Link>
-                <Link
-                  href={windowsDownloadUrl}
-                  download
-                  onClick={() => setOpen(false)}
-                  className="mt-1 inline-flex items-center justify-center gap-1.5 rounded-full px-2 py-2 text-xs text-ink-muted hover:text-ink"
-                >
-                  Mivo is now on Windows (beta) — download
+                  Download for Mac
                 </Link>
               </div>
             </motion.div>

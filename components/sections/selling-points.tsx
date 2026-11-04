@@ -27,7 +27,7 @@ export function SellingPoints() {
           </h2>
         </motion.div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
           {sellingPoints.items.map((item, index) => {
             const Icon = icons[item.icon];
             return (
@@ -38,13 +38,15 @@ export function SellingPoints() {
                 viewport={viewportOnce}
                 variants={fadeUp}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: index * 0.07 }}
-                className="flex flex-col rounded-[1.75rem] border border-ink/10 bg-surface p-6 shadow-card"
+                className="flex gap-4 rounded-[1.5rem] border border-ink/10 bg-surface p-5 shadow-card sm:flex-col sm:gap-0 sm:rounded-[1.75rem] sm:p-6"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent/15 text-accent-deep">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent/15 text-accent-deep">
                   <Icon size={20} />
                 </span>
-                <h3 className="mt-5 text-lg font-semibold leading-snug tracking-tight text-ink">{item.title}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-ink-body">{item.body}</p>
+                <div>
+                  <h3 className="text-lg font-semibold leading-snug tracking-tight text-ink sm:mt-5">{item.title}</h3>
+                  <p className="mt-1.5 text-[15px] leading-relaxed text-ink-body sm:mt-2">{item.body}</p>
+                </div>
               </motion.article>
             );
           })}

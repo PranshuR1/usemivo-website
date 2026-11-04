@@ -10,10 +10,8 @@ export const comingSoonNote = "Coming in Mivo 3.1";
 
 export const nav = {
   links: [
-    { label: "How It Works", href: "/#how-it-works" },
-    { label: "Features", href: "/#features" },
+    { label: "Why Mivo", href: "/#why-mivo" },
     { label: "Study", href: "/#study" },
-    { label: "What's new", href: "/whats-new" },
     { label: "Pricing", href: "/pricing" },
   ],
 };
@@ -795,16 +793,12 @@ export const finalCta = {
 
 export const footer = {
   product: [
-    { label: "How It Works", href: "/#how-it-works" },
-    { label: "Features", href: "/#features" },
+    { label: "Why Mivo", href: "/#why-mivo" },
     { label: "Study", href: "/#study" },
     { label: "Mivo for Mac", href: "/#mac" },
-    { label: "Milo", href: "/#milo" },
     { label: "What's new in 3.1", href: "/whats-new" },
     { label: "Pricing", href: "/pricing" },
     { label: "My account", href: "/account" },
-    { label: "Experiments", href: "/#experiments" },
-    { label: "Reviews", href: "/#reviews" },
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy" },

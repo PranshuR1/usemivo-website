@@ -50,7 +50,8 @@ export function AppStoreReviews() {
               viewport={viewportOnce}
               variants={fadeUp}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: (index % 2) * 0.08 }}
-              className="flex flex-col rounded-3xl border border-ink/10 bg-surface p-7 shadow-card"
+              // Two reviews make the point on a phone; all four show from tablet up.
+              className={`flex-col rounded-3xl border border-ink/10 bg-surface p-6 shadow-card sm:p-7 ${index < 2 ? "flex" : "hidden sm:flex"}`}
             >
               <div className="flex items-start justify-between gap-3">
                 <p className="text-[15px] font-semibold text-ink">{review.title}</p>

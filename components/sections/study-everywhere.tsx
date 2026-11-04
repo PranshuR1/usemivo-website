@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Download, Globe, Laptop, Smartphone, Users } from "lucide-react";
+import { ArrowRight, Check, Download, Globe, Laptop, Users } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ComingSoon } from "@/components/ui/coming-soon";
 import { fadeUp, viewportOnce } from "@/lib/motion";
-import { comingSoonNote, macDownloadUrl, macRelease, studyEverywhere } from "@/data/content";
+import { macDownloadUrl, macRelease, studyEverywhere } from "@/data/content";
 
 const focusBar = [
   { label: "Focused", minutes: 41, className: "bg-[#7c9c80]" },
@@ -90,7 +90,7 @@ function SmallCard({
         )}
       </div>
       <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-deep">{kicker}</p>
-      <h3 className="mt-2 font-display text-[1.7rem] leading-tight text-ink">{title}</h3>
+      <h3 className="mt-2 text-xl font-semibold leading-snug tracking-tight text-ink">{title}</h3>
       <p className="mt-3 text-[15px] leading-relaxed text-ink-body">{body}</p>
       <Link
         href={href}
@@ -104,7 +104,7 @@ function SmallCard({
 }
 
 export function StudyEverywhere() {
-  const { mac, web, room, iphone } = studyEverywhere;
+  const { mac, web, room } = studyEverywhere;
   return (
     <section id="study" className="bg-bg-alt py-24 sm:py-32">
       <Container>
@@ -151,10 +151,9 @@ export function StudyEverywhere() {
           <MacSessionPreview />
         </motion.article>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-3">
+        <div className="mt-6 grid gap-6 sm:grid-cols-2">
           <SmallCard icon={Globe} {...web} delay={0} />
           <SmallCard icon={Users} {...room} delay={0.07} />
-          <SmallCard icon={Smartphone} {...iphone} note={comingSoonNote} delay={0.14} />
         </div>
       </Container>
     </section>

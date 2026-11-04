@@ -32,10 +32,6 @@ export function FinalCta() {
             </ButtonLink>
           </div>
           <p className="mt-4 text-xs uppercase tracking-[0.15em] text-cream-muted">{finalCta.availability}</p>
-
-          <p className="mx-auto mt-14 max-w-sm whitespace-pre-line border-t border-cream/10 pt-8 text-sm leading-relaxed text-cream-muted">
-            {finalCta.closingLine}
-          </p>
         </motion.div>
       </Container>
     </section>
