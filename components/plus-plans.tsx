@@ -24,7 +24,7 @@ export function PlusPlans() {
                 </span>
               )}
             </div>
-            <p className="mt-5 flex items-baseline gap-2">
+            <p className="mt-5 flex flex-wrap items-baseline gap-x-2 gap-y-1">
               <span className="text-4xl font-semibold tracking-tight text-ink">{usd(plan.price)}</span>
               <span className="text-sm text-ink-muted">{plan.period}</span>
             </p>

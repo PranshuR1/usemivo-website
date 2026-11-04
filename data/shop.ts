@@ -18,7 +18,14 @@ export const plusBenefits = [
   "Your attention receipt, every day",
 ];
 
-export const plusFree = "The basic pause and Milo stay free. Your starting point and commitment check-ins join them in the next update.";
+export const freeToday = [
+  "Screen-time estimates and pattern insights on iPhone",
+  "Intentional pauses before opening tracked apps",
+  "The web study timer, session receipts and streaks",
+  "Mivo for Mac with focus tracking",
+];
+
+export const plusFree = "Download Mivo and use the web study timer for free today. Mivo Plus is planned for the next iPhone update.";
 
 export const plusDisclosure =
   "Payment is charged to your Apple ID at confirmation. Subscriptions renew automatically unless cancelled at least 24 hours before the period ends, and you can manage or cancel them in Settings > Apple ID > Subscriptions. Lifetime is a one-time purchase.";
@@ -39,16 +46,16 @@ export function perMonthOfYearly() {
 
 export const pricingFaq = [
   {
-    q: "What stays free?",
-    a: "The basic pause and Milo stay free. Your starting point, commitments and completion check-ins are free features in the next update. Plus includes Clear, Still and weekly experiments.",
+    q: "What can I use for free today?",
+    a: "The current iPhone app and Mac app are free to download. You can also use the web study timer, save session receipts and build a streak without an account. Sign in to sync your sessions. Plus pricing applies to the upcoming iPhone update, not the current release.",
   },
   {
-    q: "How do I buy Mivo Plus?",
-    a: "In the Mivo app, with your Apple ID. You can manage or cancel a subscription in Settings > Apple ID > Subscriptions. Apple handles billing and refunds for Plus.",
+    q: "Can I buy Mivo Plus now?",
+    a: "Not yet. Plus is planned for Mivo 3.1. Once it launches, you will be able to purchase it inside the iPhone app with your Apple ID. You will be able to manage or cancel a subscription in Settings > Apple ID > Subscriptions.",
   },
   {
     q: "Is there a free trial?",
-    a: "The yearly plan starts with a 7-day free trial. Cancel at least 24 hours before it ends and you are not charged.",
+    a: "A 7-day free trial is planned for the yearly Plus plan when it launches. Cancel at least 24 hours before the trial ends to avoid being charged. The web study timer is free without a trial.",
   },
   {
     q: "What does Lifetime mean?",

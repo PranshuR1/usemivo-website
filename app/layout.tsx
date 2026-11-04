@@ -19,22 +19,22 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://usemivo.app"),
-  title: "Mivo — Understand Your Scrolling. Change It Without Guilt.",
+  title: "Mivo — Less scrolling. More time for you.",
   description:
-    "Mivo helps you notice missing screen time, recognize your patterns, and make more intentional choices. No shame, no gamified discipline — just the truth.",
+    "Understand your screen time, pause automatic app opens, and make room for what matters. Download Mivo for iPhone and Mac, or try the free study timer.",
   openGraph: {
-    title: "Mivo — Understand Your Scrolling. Change It Without Guilt.",
+    title: "Mivo — Less scrolling. More time for you.",
     description:
-      "Mivo helps you notice missing screen time, recognize your patterns, and make more intentional choices.",
+      "Understand your screen time, pause automatic app opens, and make room for what matters. Available on iPhone, Mac and the web.",
     url: "https://usemivo.app",
     siteName: "Mivo",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mivo — Understand Your Scrolling. Change It Without Guilt.",
+    title: "Mivo — Less scrolling. More time for you.",
     description:
-      "Mivo helps you notice missing screen time, recognize your patterns, and make more intentional choices.",
+      "Understand your screen time, pause automatic app opens, and make room for what matters. Available on iPhone, Mac and the web.",
   },
 };
 

@@ -17,9 +17,9 @@ export const nav = {
 };
 
 export const hero = {
-  badge: "New: Mivo for Mac 1.1, with study sessions",
-  headline: ["Scroll on purpose.", "Study first. Scroll after."],
-  sub: "Mivo shows how much you really scroll, opens Instagram, TikTok and YouTube without the endless feed, and counts the time you actually spend studying.",
+  badge: "Now on Mac, too",
+  headline: ["Less scrolling.", "More time for you."],
+  sub: "Catch the scroll before it takes your evening. Mivo helps you notice your habits and pause before opening distracting apps.",
   ctaPrimary: "Download for iPhone",
   ctaSecondary: "Download for Mac",
 };
@@ -27,12 +27,12 @@ export const hero = {
 // The reasons to pick Mivo, shown straight under the hero. Only things people can use today.
 export const sellingPoints = {
   eyebrow: "Why Mivo",
-  heading: "What makes Mivo different.",
+  heading: "Small pauses. Better choices.",
   items: [
     {
       icon: "truth",
       title: "The real number, not a guess",
-      body: "Guess your screen time first, then see the truth. Most people are off by 2–3×, and watching that gap shrink is the point.",
+      body: "Guess your screen time, then compare it with your actual use. See the little opens that add up and the patterns you might have missed.",
     },
     {
       icon: "clear",
@@ -42,12 +42,12 @@ export const sellingPoints = {
     {
       icon: "study",
       title: "Study time that actually counts",
-      body: "Start a session on your Mac or in your browser. Only focused minutes count, and one streak follows you everywhere.",
+      body: "Track focused time on your Mac, or start a simple timer in your browser. Sign in to keep your sessions and streak together.",
     },
     {
       icon: "pause",
-      title: "A pause, never a lockout",
-      body: "Before a tracked app opens, Mivo asks why. Five seconds turn a reflex into a choice. Scrolling is always allowed.",
+      title: "A moment to mean it",
+      body: "Before a tracked app opens, Mivo asks why you're there. A short pause gives you room to choose instead of opening on autopilot.",
     },
   ],
 } as const;
@@ -56,7 +56,7 @@ export const sellingPoints = {
 export const studyEverywhere = {
   eyebrow: "Study, synced",
   heading: "Study on any screen. Keep one streak.",
-  sub: "Name the one thing you're doing and start. Mivo counts the time you actually spend on it, and every session lands in the same history on your account.",
+  sub: "Pick one task and make a little room for it. Use the Mac app for focus tracking or the free web timer to get started. Sign in to save your sessions across devices.",
   mac: {
     kicker: "Mivo for Mac · Available now",
     title: "Your Mac knows when you're really studying.",
@@ -71,7 +71,7 @@ export const studyEverywhere = {
   web: {
     kicker: "In your browser",
     title: "No app? Open the study page.",
-    body: "A timer, a receipt and your streak in any browser. Sign in and the session saves to your account.",
+    body: "Name a task, start the timer and save a receipt when you're done. No camera or account needed. Sign in when you want to sync.",
     cta: "Start a session",
     href: "/study",
   },
@@ -785,8 +785,8 @@ export const philosophy = {
 
 export const finalCta = {
   eyebrow: "Ready?",
-  heading: "Awareness changes behavior.",
-  body: "Mivo helps you see your habits clearly enough to choose differently. No shame. No rules. Just honesty.",
+  heading: "Make your next open a choice.",
+  body: "Start noticing where your time goes. A small pause today can make room for something you meant to do.",
   availability: "Available now · Free to download · iPhone and Mac",
   closingLine: "Not wellness. Not discipline.\nJust knowing what you are actually doing with your time.",
 };

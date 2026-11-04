@@ -391,10 +391,14 @@ export function StudySession({ backHref, backLabel = "Back to your account" }: {
             <div className="mx-auto mb-5 grid h-[72px] w-[72px] place-items-center rounded-lg bg-surface font-sans text-2xl font-extrabold text-accent-deep">
               mivo
             </div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-accent-deep">Your study space</p>
             <form onSubmit={start}>
-              <label htmlFor="task" className="font-display text-4xl italic text-ink">
+              <h1><label htmlFor="task" className="font-display text-4xl italic text-ink">
                 What&apos;s the one thing you&apos;re doing?
-              </label>
+              </label></h1>
+              <p className="mt-4 text-[15px] leading-relaxed text-ink-body">
+                Pick one task. Start the timer. Give it your attention.
+              </p>
               <input
                 id="task"
                 type="text"
@@ -406,21 +410,16 @@ export function StudySession({ backHref, backLabel = "Back to your account" }: {
                 className="mt-6 block w-full rounded-lg bg-surface px-4 py-4 text-base text-ink placeholder:text-ink-muted"
                 placeholder="Chapter 4 notes"
               />
-              <ul className="mt-5 space-y-2 text-left text-[14px] leading-relaxed text-ink-body">
-                <li>Plug the phone in and prop it up across the room.</li>
-                <li>Point it at your hands and desk. Your face is optional.</li>
-                <li>
-                  This page just keeps time. In the next Mivo update the app films the session and
-                  turns it into scroll time, free for your first 7 days of studying, then part of
-                  Mivo Plus.
-                </li>
-              </ul>
+              <p className="mt-4 text-left text-[13px] leading-relaxed text-ink-muted">
+                Free to use, with no camera or account required. This timer records elapsed time;
+                it doesn&apos;t monitor your activity. Finish your session to save a receipt.
+              </p>
               <button
                 type="submit"
                 disabled={!draft.trim()}
                 className={`${primary} mt-3 disabled:opacity-50`}
               >
-                Start
+                Start studying
               </button>
             </form>
             {stats}
