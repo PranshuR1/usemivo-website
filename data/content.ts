@@ -10,7 +10,7 @@ export const comingSoonNote = "Coming in Mivo 3.1";
 
 export const nav = {
   links: [
-    { label: "Why Mivo", href: "/#why-mivo" },
+    { label: "Features", href: "/features" },
     { label: "Study", href: "/#study" },
     { label: "Pricing", href: "/pricing" },
   ],
@@ -793,7 +793,8 @@ export const finalCta = {
 
 export const footer = {
   product: [
-    { label: "Why Mivo", href: "/#why-mivo" },
+    { label: "All features", href: "/features" },
+    { label: "How it works", href: "/features#how-it-works" },
     { label: "Study", href: "/#study" },
     { label: "Mivo for Mac", href: "/#mac" },
     { label: "What's new in 3.1", href: "/whats-new" },

@@ -5,6 +5,7 @@ const base = "https://usemivo.app";
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     { path: "", priority: 1 },
+    { path: "/features", priority: 0.9 },
     { path: "/whats-new", priority: 0.8 },
     { path: "/pricing", priority: 0.9 },
     { path: "/support", priority: 0.5 },

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { BookOpen, Filter, Hand, Scale } from "lucide-react";
+import { ButtonLink } from "@/components/ui/button-link";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { fadeUp, viewportOnce } from "@/lib/motion";
@@ -50,6 +51,12 @@ export function SellingPoints() {
               </motion.article>
             );
           })}
+        </div>
+
+        <div className="mt-8 flex justify-center">
+          <ButtonLink href="/features" variant="secondary" showArrow={false}>
+            See every feature
+          </ButtonLink>
         </div>
       </Container>
     </section>
