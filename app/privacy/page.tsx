@@ -37,6 +37,19 @@ export default function PrivacyPage() {
         , including the Limited Use requirements.
       </p>
       <h2 className="pt-4 font-display text-2xl italic text-ink">
+        Mac activity and optional backup
+      </h2>
+      <p>
+        Mivo for Mac stores detailed activity on your Mac. Detailed activity backup is
+        off by default, including for existing installations. If you explicitly enable
+        it in Mac Settings, new app names, window titles, captured website addresses,
+        timestamps, focus sessions and recall notes are backed up to your account.
+        Activity from before your consent is excluded. Turning backup off stops future
+        uploads; data already backed up remains in your account. This choice is saved
+        separately for each account on each Mac. Study sync is separate and excludes
+        window titles and website addresses.
+      </p>
+      <h2 className="pt-4 font-display text-2xl italic text-ink">
         Studying and study rooms
       </h2>
       <p>

@@ -1,11 +1,12 @@
 {
-  "version": "1.1",
-  "build": 2,
-  "url": "https://github.com/PranshuR1/usemivo-website/releases/download/mac-v1.1/Mivo.dmg",
+  "version": "1.2",
+  "build": 3,
+  "url": "https://github.com/PranshuR1/usemivo-website/releases/download/mac-v1.2/Mivo.zip",
   "minimumSystemVersion": "13.0",
   "notes": [
-    "Study on your Mac: start a session, see focused time count live, and keep one streak with usemivo.app.",
-    "Study rooms: share one link so friends can sit with you.",
-    "Being offline at login no longer signs you out."
+    "Detailed activity backup is off by default, with explicit consent before backing up new activity.",
+    "Shorter setup opens a ready-to-start 25-minute Focus timer. Study and Focus have clearer entry points.",
+    "Recovery prompts appear once, and update checks clearly report connection failures.",
+    "Developer ID signed and Apple notarized. Unzip Mivo and drag it into Applications to install."
   ]
 }

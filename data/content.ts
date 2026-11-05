@@ -1,7 +1,7 @@
 export const appStoreUrl = "https://apps.apple.com/us/app/mivo-scrolling/id6762094544";
-export const macDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/mac-v1.1/Mivo.dmg";
+export const macDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/mac-v1.2/Mivo.zip";
 // Keep in step with public/mac/latest.json, which installed Mac apps read to offer the update.
-export const macRelease = { version: "1.1", size: "3 MB", requires: "macOS 13 or later" };
+export const macRelease = { version: "1.2", size: "3 MB", requires: "macOS 13 or later" };
 export const windowsDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/v1.0.0/Mivo-Setup.exe";
 
 // Milo is built but not in the iPhone App Store version yet (3.0, Aug 26).
@@ -62,7 +62,7 @@ export const studyEverywhere = {
     title: "Your Mac knows when you're really studying.",
     body: "Start a session and watch focused time count live. Docs, PDFs, Quizlet and Canvas count. A feed, a long break or a locked screen doesn't.",
     points: [
-      "Only totals sync. Window titles and websites stay on your Mac",
+      "Study syncs totals. Detailed activity backup is off by default",
       "Join a session your iPhone started, or start one right there",
       "Start and finish from the menu bar",
     ],
@@ -519,7 +519,7 @@ export const featureCategories = [
         title: "Study on Your Mac",
         body: "Start a study session on your Mac, or join one your iPhone started. Focused time counts live, and distraction, breaks or a locked screen don't.",
         detail:
-          "Mivo knows common study apps and sites (Preview, Word, Google Docs, Quizlet, Canvas and more), and one click counts anything else for the session. Only the totals leave your Mac, never window titles or websites.",
+          "Mivo knows common study apps and sites (Preview, Word, Google Docs, Quizlet, Canvas and more), and one click counts anything else for the session. Study sync excludes window titles and websites. Detailed activity backup is separate and off by default.",
       },
       {
         title: "One Study Streak, Every Device",
