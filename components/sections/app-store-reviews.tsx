@@ -1,10 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Star, BadgeCheck } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeader } from "@/components/ui/section-header";
-import { fadeUp, viewportOnce } from "@/lib/motion";
 import { appStoreReviews } from "@/data/content";
 
 export function AppStoreReviews() {
@@ -13,7 +9,7 @@ export function AppStoreReviews() {
   return (
     <section id="reviews" className="py-24 sm:py-32">
       <Container>
-        <motion.div initial="hidden" whileInView="show" viewport={viewportOnce} variants={fadeUp}>
+        <div>
           <SectionHeader
             eyebrow={appStoreReviews.eyebrow}
             heading={appStoreReviews.heading}
@@ -39,19 +35,13 @@ export function AppStoreReviews() {
               </span>
             </a>
           </SectionHeader>
-        </motion.div>
+        </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2">
-          {appStoreReviews.reviews.map((review, index) => (
-            <motion.figure
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:mt-16 lg:gap-8">
+          {appStoreReviews.reviews.slice(0, 2).map((review) => (
+            <figure
               key={review.author}
-              initial="hidden"
-              whileInView="show"
-              viewport={viewportOnce}
-              variants={fadeUp}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: (index % 2) * 0.08 }}
-              // Two reviews make the point on a phone; all four show from tablet up.
-              className={`flex-col rounded-3xl border border-ink/10 bg-surface p-6 shadow-card sm:p-7 ${index < 2 ? "flex" : "hidden sm:flex"}`}
+              className="flex flex-col rounded-3xl border border-ink/10 bg-surface p-7 sm:p-9"
             >
               <div className="flex items-start justify-between gap-3">
                 <p className="text-[15px] font-semibold text-ink">{review.title}</p>
@@ -67,7 +57,7 @@ export function AppStoreReviews() {
                 <span className="text-xs font-medium text-ink-body">{review.author}</span>
                 <span className="text-xs text-ink-muted">{review.date}</span>
               </figcaption>
-            </motion.figure>
+            </figure>
           ))}
         </div>
       </Container>

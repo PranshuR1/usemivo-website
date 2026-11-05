@@ -4,21 +4,20 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { ComingSoon } from "@/components/ui/coming-soon";
 import { ButtonLink } from "@/components/ui/button-link";
 import { freeToday, perMonthOfYearly, plusNote } from "@/data/shop";
-import { appStoreUrl } from "@/data/content";
 
 export function Pricing() {
   return (
-    <section id="pricing" className="pb-20 pt-8 sm:pb-28">
+    <section id="pricing" className="border-t border-ink/10 bg-bg-alt/50 py-20 sm:py-28 lg:py-32">
       <Container>
         <SectionHeader eyebrow="A clear starting point" heading="Start free. Know what's next." sub="Use Mivo today. Decide about Plus when it arrives." />
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:mt-16 lg:gap-8">
           <article className="flex flex-col rounded-[2rem] border border-kept/25 bg-surface p-7 sm:p-9">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-kept">Available today</p>
             <h3 className="mt-4 font-display text-4xl text-ink">Meet Mivo. For free.</h3>
             <ul className="my-6 space-y-3">
               {freeToday.map((item) => <li key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-body"><Check aria-hidden="true" size={16} className="mt-0.5 shrink-0 text-kept" />{item}</li>)}
             </ul>
-            <ButtonLink href={appStoreUrl} className="mt-auto self-start">Download for iPhone</ButtonLink>
+            <ButtonLink href="#download" className="mt-auto self-start">Choose your device</ButtonLink>
           </article>
           <article className="flex flex-col items-start rounded-[2rem] border border-ink/10 bg-bg-alt p-7 sm:p-9">
             <ComingSoon>{plusNote}</ComingSoon>

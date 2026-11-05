@@ -22,7 +22,7 @@ export const freeToday = [
   "Screen-time estimates and pattern insights on iPhone",
   "Intentional pauses before opening tracked apps",
   "The web study timer, session receipts and streaks",
-  "Mivo for Mac with focus tracking",
+  "Mivo for Mac and Windows with focus tracking",
 ];
 
 export const plusFree = "Download Mivo and use the web study timer for free today. Mivo Plus is planned for the next iPhone update.";

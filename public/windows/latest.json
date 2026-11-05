@@ -1,0 +1,11 @@
+{
+  "version": "1.1",
+  "build": 2,
+  "url": "https://github.com/PranshuR1/usemivo-website/releases/download/windows-v1.1/Mivo-Setup.exe",
+  "minimumSystemVersion": "10.0",
+  "notes": [
+    "Mivo for Windows: everything Mivo for Mac does, on your PC.",
+    "Study sessions that sync with your iPhone and usemivo.app, with study rooms.",
+    "Focus Studio, Mivo Clear, the Attention Receipt and Milo."
+  ]
+}

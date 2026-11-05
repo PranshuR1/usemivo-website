@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
-import { appStoreUrl, macDownloadUrl, macRelease, windowsDownloadUrl } from "@/data/content";
+import { appStoreUrl, macDownloadUrl, macRelease, windowsDownloadUrl, windowsRelease } from "@/data/content";
 import { cn } from "@/lib/utils";
 
 export function DownloadDropdown() {
@@ -72,13 +72,13 @@ export function DownloadDropdown() {
             role="menuitem"
             className="flex flex-col gap-0.5 border-t border-ink/10 px-4 py-3 transition-colors hover:bg-ink/5"
           >
-            <span className="flex items-center gap-1.5 text-sm font-medium text-ink-muted">
+            <span className="flex items-center gap-1.5 text-sm font-medium text-ink">
               Windows
               <span className="rounded-full bg-ink/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-ink-muted">
                 Beta
               </span>
             </span>
-            <span className="text-xs text-ink-muted">Mivo is now on Windows (beta)</span>
+            <span className="text-xs text-ink-muted">Version {windowsRelease.version} · Windows 10 / 11</span>
           </Link>
         </div>
       )}

@@ -2,7 +2,9 @@ export const appStoreUrl = "https://apps.apple.com/us/app/mivo-scrolling/id67620
 export const macDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/mac-v1.2/Mivo.zip";
 // Keep in step with public/mac/latest.json, which installed Mac apps read to offer the update.
 export const macRelease = { version: "1.2", size: "3 MB", requires: "macOS 13 or later" };
-export const windowsDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/v1.0.0/Mivo-Setup.exe";
+export const windowsDownloadUrl = "https://github.com/PranshuR1/usemivo-website/releases/download/windows-v1.1/Mivo-Setup.exe";
+// Keep in step with public/windows/latest.json, which installed Windows apps read to offer the update.
+export const windowsRelease = { version: "1.1", size: "107 MB", requires: "Windows 10 or 11, 64-bit" };
 
 // Milo is built but not in the iPhone App Store version yet (3.0, Aug 26).
 // Remove the notes that use this once the update that includes them is live.
@@ -17,11 +19,11 @@ export const nav = {
 };
 
 export const hero = {
-  badge: "Now on Mac, too",
+  badge: "Now on Mac & Windows",
   headline: ["Less scrolling.", "More time for you."],
   sub: "Catch the scroll before it takes your evening. Mivo helps you notice your habits and pause before opening distracting apps.",
   ctaPrimary: "Download for iPhone",
-  ctaSecondary: "Download for Mac",
+  ctaSecondary: "Mac & Windows",
 };
 
 // The reasons to pick Mivo, shown straight under the hero. Only things people can use today.
@@ -42,7 +44,7 @@ export const sellingPoints = {
     {
       icon: "study",
       title: "Study time that actually counts",
-      body: "Track focused time on your Mac, or start a simple timer in your browser. Sign in to keep your sessions and streak together.",
+      body: "Track focused time on Mac or Windows, or start a timer in your browser. Keep your sessions and streak together.",
     },
     {
       icon: "pause",
@@ -56,15 +58,15 @@ export const sellingPoints = {
 export const studyEverywhere = {
   eyebrow: "Study, synced",
   heading: "Study on any screen. Keep one streak.",
-  sub: "Pick one task and make a little room for it. Use the Mac app for focus tracking or the free web timer to get started. Sign in to save your sessions across devices.",
+  sub: "Pick one task and make a little room for it. Use the desktop app for focus tracking or start with the free web timer. Sign in to save your sessions across devices.",
   mac: {
-    kicker: "Mivo for Mac · Available now",
-    title: "Your Mac knows when you're really studying.",
+    kicker: "Mivo for Mac & Windows",
+    title: "Make your focused time count.",
     body: "Start a session and watch focused time count live. Docs, PDFs, Quizlet and Canvas count. A feed, a long break or a locked screen doesn't.",
     points: [
       "Study syncs totals. Detailed activity backup is off by default",
-      "Join a session your iPhone started, or start one right there",
-      "Start and finish from the menu bar",
+      "Keep sessions and streaks together across devices",
+      "Quick access from your menu bar or Windows tray",
     ],
     cta: "Download for Mac",
   },
@@ -787,7 +789,7 @@ export const finalCta = {
   eyebrow: "Ready?",
   heading: "Make your next open a choice.",
   body: "Start noticing where your time goes. A small pause today can make room for something you meant to do.",
-  availability: "Available now · Free to download · iPhone and Mac",
+  availability: "Free to download · iPhone, Mac & Windows",
   closingLine: "Not wellness. Not discipline.\nJust knowing what you are actually doing with your time.",
 };
 
@@ -796,7 +798,7 @@ export const footer = {
     { label: "All features", href: "/features" },
     { label: "How it works", href: "/features#how-it-works" },
     { label: "Study", href: "/#study" },
-    { label: "Mivo for Mac", href: "/#mac" },
+    { label: "Mac & Windows", href: "/#download" },
     { label: "What's new in 3.1", href: "/whats-new" },
     { label: "Pricing", href: "/pricing" },
     { label: "My account", href: "/account" },

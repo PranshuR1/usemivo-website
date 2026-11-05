@@ -3,12 +3,12 @@ import { ChevronDown, Download } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
 import { ButtonLink } from "@/components/ui/button-link";
 import { ComingSoon } from "@/components/ui/coming-soon";
-import { appStoreUrl, featureCategories, macDownloadUrl, macRelease, steps } from "@/data/content";
+import { appStoreUrl, featureCategories, macDownloadUrl, macRelease, steps, windowsDownloadUrl, windowsRelease } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "Features — Mivo",
   description:
-    "Everything Mivo does: honest Screen Time, the pause before you scroll, Mivo Still, Milo, Mivo for Mac, focus sessions, experiments, reports and privacy controls.",
+    "Everything Mivo does: honest Screen Time, the pause before you scroll, Mivo Still, Milo, Mivo for Mac and Windows, focus sessions, experiments, reports and privacy controls.",
   alternates: { canonical: "/features" },
 };
 
@@ -32,9 +32,9 @@ export default function FeaturesPage() {
     >
       <nav
         aria-label="Feature groups"
-        className="sticky top-[4.5rem] z-30 -mx-6 mt-10 overflow-x-auto bg-bg/95 px-6 py-3 backdrop-blur-md sm:top-[5.5rem] sm:mx-0 sm:rounded-full sm:border sm:border-ink/10 sm:bg-bg/85 sm:px-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mt-12 rounded-2xl border border-ink/10 bg-surface p-4 sm:mt-16 sm:p-5"
       >
-        <ul className="flex w-max gap-1.5">
+        <ul className="flex flex-wrap gap-2">
           <li>
             <a
               href="#how-it-works"
@@ -58,7 +58,7 @@ export default function FeaturesPage() {
 
       <section id="how-it-works" className="mt-14 scroll-mt-40">
         <h2 className="font-display text-3xl italic text-ink sm:text-4xl">How it works</h2>
-        <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-8 grid gap-6 sm:grid-cols-2 lg:gap-8">
           {steps.map((step) => (
             <li key={step.n} className="rounded-3xl border border-ink/10 bg-surface p-6 shadow-card">
               <span className="font-display text-4xl leading-none text-accent">{step.n}</span>
@@ -71,17 +71,17 @@ export default function FeaturesPage() {
       </section>
 
       {featureCategories.map((category) => (
-        <section key={category.category} id={slug(category.category)} className="mt-20 scroll-mt-40">
+        <section key={category.category} id={slug(category.category)} className="mt-20 scroll-mt-28 border-t border-ink/10 pt-10 sm:mt-24 sm:pt-12">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <h2 className="font-display text-3xl italic text-ink sm:text-4xl">{category.category}</h2>
             {"note" in category && category.note ? <ComingSoon>{category.note}</ComingSoon> : null}
           </div>
 
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:gap-8">
             {category.features.map((feature) => (
               <li
                 key={feature.title}
-                className="flex flex-col rounded-3xl border border-ink/10 bg-surface p-6 shadow-card"
+                className="flex flex-col rounded-3xl border border-ink/10 bg-surface p-7 sm:p-8"
               >
                 <h3 className="text-[17px] font-semibold leading-snug tracking-tight text-ink">{feature.title}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-ink-body">{feature.body}</p>
@@ -99,17 +99,19 @@ export default function FeaturesPage() {
           </ul>
 
           {category.category === "Mivo for Mac" && (
-            <div className="mt-5 flex flex-wrap items-center gap-4">
-              <a
-                href={macDownloadUrl}
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-espresso px-6 text-sm font-medium text-cream transition-colors hover:bg-espresso-raised"
-              >
-                <Download size={15} />
-                Download for Mac
-              </a>
-              <p className="text-xs text-ink-muted">
-                Free · Version {macRelease.version} · {macRelease.requires} · {macRelease.size}
-              </p>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2">
+              <div className="rounded-2xl border border-ink/10 p-6">
+                <a href={macDownloadUrl} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink hover:text-accent-deep">
+                  <Download size={15} /> Download for Mac
+                </a>
+                <p className="mt-2 text-xs leading-relaxed text-ink-muted">Version {macRelease.version} · {macRelease.requires} · {macRelease.size}</p>
+              </div>
+              <div className="rounded-2xl border border-ink/10 p-6">
+                <a href={windowsDownloadUrl} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink hover:text-accent-deep">
+                  <Download size={15} /> Download for Windows (beta)
+                </a>
+                <p className="mt-2 text-xs leading-relaxed text-ink-muted">Version {windowsRelease.version} · {windowsRelease.requires} · {windowsRelease.size}</p>
+              </div>
             </div>
           )}
         </section>

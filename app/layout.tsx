@@ -21,11 +21,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://usemivo.app"),
   title: "Mivo — Less scrolling. More time for you.",
   description:
-    "Understand your screen time, pause automatic app opens, and make room for what matters. Download Mivo for iPhone and Mac, or try the free study timer.",
+    "Understand your screen time, pause automatic app opens, and make room for what matters. Download Mivo for iPhone, Mac and Windows, or try the free study timer.",
   openGraph: {
     title: "Mivo — Less scrolling. More time for you.",
     description:
-      "Understand your screen time, pause automatic app opens, and make room for what matters. Available on iPhone, Mac and the web.",
+      "Understand your screen time, pause automatic app opens, and make room for what matters. Available on iPhone, Mac, Windows and the web.",
     url: "https://usemivo.app",
     siteName: "Mivo",
     type: "website",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mivo — Less scrolling. More time for you.",
     description:
-      "Understand your screen time, pause automatic app opens, and make room for what matters. Available on iPhone, Mac and the web.",
+      "Understand your screen time, pause automatic app opens, and make room for what matters. Available on iPhone, Mac, Windows and the web.",
   },
 };
 

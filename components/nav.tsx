@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { nav, appStoreUrl, macDownloadUrl } from "@/data/content";
+import { nav, appStoreUrl, macDownloadUrl, windowsDownloadUrl } from "@/data/content";
 import { DownloadDropdown } from "./download-dropdown";
 
 export function Nav() {
@@ -104,6 +104,9 @@ export function Nav() {
                 >
                   Download for Mac
                 </Link>
+                <a href={windowsDownloadUrl} download onClick={() => setOpen(false)} className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-ink/15 text-sm font-medium text-ink hover:bg-ink/5">
+                  Download for Windows <span className="text-xs font-normal text-ink-muted">Beta</span>
+                </a>
               </div>
             </motion.div>
           )}
